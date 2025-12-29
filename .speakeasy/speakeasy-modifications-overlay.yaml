@@ -1,0 +1,352 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Speakeasy Modifications
+  version: 0.0.3
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/v1/player/{identifier}/analysis"]["get"]
+    update:
+      x-speakeasy-name-override: analyze
+    x-speakeasy-metadata:
+      after: sdk.player.analyze()
+      before: sdk.Player.get_/v1/player/{identifier}/analysis()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/bans-history"]["get"]
+    update:
+      x-speakeasy-name-override: getBanHistory
+    x-speakeasy-metadata:
+      after: sdk.server.getBanHistory()
+      before: sdk.Server.get_/v1/server/bans-history()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/bans/search"]["get"]
+    update:
+      x-speakeasy-name-override: search
+    x-speakeasy-metadata:
+      after: sdk.bans.search()
+      before: sdk.Bans.get_/v1/bans/search()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/player/{identifier}/bans-history"]["get"]
+    update:
+      x-speakeasy-name-override: getBansHistory
+    x-speakeasy-metadata:
+      after: sdk.player.getBansHistory()
+      before: sdk.Player.get_/v1/player/{identifier}/bans-history()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/unban"]["post"]
+    update:
+      x-speakeasy-name-override: unban
+    x-speakeasy-metadata:
+      after: sdk.server.unban()
+      before: sdk.Server.post_/v1/server/unban()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/player/{identifier}/discord-lookup"]["get"]
+    update:
+      x-speakeasy-name-override: discordLookup
+    x-speakeasy-metadata:
+      after: sdk.player.discordLookup()
+      before: sdk.Player.get_/v1/player/{identifier}/discord-lookup()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/logs"]["get"]
+    update:
+      x-speakeasy-name-override: getLogs
+    x-speakeasy-metadata:
+      after: sdk.server.getLogs()
+      before: sdk.Server.get_/v1/server/logs()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/webhooks/{id}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      after: sdk.webhooks.delete()
+      before: sdk.Webhooks.delete_/v1/webhooks/{id}()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/player/{identifier}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.player.get()
+      before: sdk.Player.get_/v1/player/{identifier}()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/webhooks"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.webhooks.list()
+      before: sdk.Webhooks.get_/v1/webhooks()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/players"]["get"]
+    update:
+      x-speakeasy-name-override: getPlayers
+    x-speakeasy-metadata:
+      after: sdk.server.getPlayers()
+      before: sdk.Server.get_/v1/server/players()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/bans/trends"]["get"]
+    update:
+      x-speakeasy-name-override: getTrends
+    x-speakeasy-metadata:
+      after: sdk.bans.getTrends()
+      before: sdk.Bans.get_/v1/bans/trends()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/admins"]["get"]
+    update:
+      x-speakeasy-name-override: getAdmins
+    x-speakeasy-metadata:
+      after: sdk.server.getAdmins()
+      before: sdk.Server.get_/v1/server/admins()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/ban/offline"]["post"]
+    update:
+      x-speakeasy-name-override: banOffline
+    x-speakeasy-metadata:
+      after: sdk.server.banOffline()
+      before: sdk.Server.post_/v1/server/ban/offline()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/admin/remove"]["post"]
+    update:
+      x-speakeasy-name-override: removeAdmin
+    x-speakeasy-metadata:
+      after: sdk.server.removeAdmin()
+      before: sdk.Server.post_/v1/server/admin/remove()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/bans/recent"]["get"]
+    update:
+      x-speakeasy-name-override: getRecent
+    x-speakeasy-metadata:
+      after: sdk.bans.getRecent()
+      before: sdk.Bans.get_/v1/bans/recent()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/lookup"]["post"]
+    update:
+      x-speakeasy-name-override: lookupPlayer
+    x-speakeasy-metadata:
+      after: sdk.server.lookupPlayer()
+      before: sdk.Server.post_/v1/server/lookup()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/screenshot"]["post"]
+    update:
+      x-speakeasy-name-override: requestScreenshot
+    x-speakeasy-metadata:
+      after: sdk.server.requestScreenshot()
+      before: sdk.Server.post_/v1/server/screenshot()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/player/{identifier}/threat-score"]["get"]
+    update:
+      x-speakeasy-name-override: get_threat_score
+    x-speakeasy-metadata:
+      after: sdk.player.get_threat_score()
+      before: sdk.Player.get_/v1/player/{identifier}/threat-score()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/bans"]["get"]
+    update:
+      x-speakeasy-name-override: getBans
+    x-speakeasy-metadata:
+      after: sdk.server.getBans()
+      before: sdk.Server.get_/v1/server/bans()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/keys/usage"]["get"]
+    update:
+      x-speakeasy-name-override: getUsage
+    x-speakeasy-metadata:
+      after: sdk.keys.getUsage()
+      before: sdk.Keys.get_/v1/keys/usage()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/bans/stats"]["get"]
+    update:
+      x-speakeasy-name-override: getStats
+    x-speakeasy-metadata:
+      after: sdk.bans.getStats()
+      before: sdk.Bans.get_/v1/bans/stats()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server"]["get"]
+    update:
+      x-speakeasy-name-override: getInfo
+    x-speakeasy-metadata:
+      after: sdk.server.getInfo()
+      before: sdk.Server.get_/v1/server()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/unban/last"]["post"]
+    update:
+      x-speakeasy-name-override: unbanLast
+    x-speakeasy-metadata:
+      after: sdk.server.unbanLast()
+      before: sdk.Server.post_/v1/server/unban/last()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/unban/all"]["post"]
+    update:
+      x-speakeasy-name-override: unbanAll
+    x-speakeasy-metadata:
+      after: sdk.server.unbanAll()
+      before: sdk.Server.post_/v1/server/unban/all()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/config"]["get"]
+    update:
+      x-speakeasy-name-override: getConfig
+    x-speakeasy-metadata:
+      after: sdk.server.getConfig()
+      before: sdk.Server.get_/v1/server/config()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/auth/verify"]["post"]
+    update:
+      x-speakeasy-name-override: verify
+    x-speakeasy-metadata:
+      after: sdk.auth.verify()
+      before: sdk.Auth.post_/v1/auth/verify()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/stats"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.stats.get()
+      before: sdk.Stats.get_/v1/stats()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/stats"]["get"]
+    update:
+      x-speakeasy-name-override: getStats
+    x-speakeasy-metadata:
+      after: sdk.server.getStats()
+      before: sdk.Server.get_/v1/server/stats()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/webhooks"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.webhooks.create()
+      before: sdk.Webhooks.post_/v1/webhooks()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/player/{identifier}/bans"]["get"]
+    update:
+      x-speakeasy-name-override: getBans
+    x-speakeasy-metadata:
+      after: sdk.player.getBans()
+      before: sdk.Player.get_/v1/player/{identifier}/bans()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/ban"]["post"]
+    update:
+      x-speakeasy-name-override: ban
+    x-speakeasy-metadata:
+      after: sdk.server.ban()
+      before: sdk.Server.post_/v1/server/ban()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/exec"]["post"]
+    update:
+      x-speakeasy-name-override: executeCommand
+    x-speakeasy-metadata:
+      after: sdk.server.executeCommand()
+      before: sdk.Server.post_/v1/server/exec()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/kick"]["post"]
+    update:
+      x-speakeasy-name-override: kick
+    x-speakeasy-metadata:
+      after: sdk.server.kick()
+      before: sdk.Server.post_/v1/server/kick()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/player/{identifier}/servers"]["get"]
+    update:
+      x-speakeasy-name-override: getServers
+    x-speakeasy-metadata:
+      after: sdk.player.getServers()
+      before: sdk.Player.get_/v1/player/{identifier}/servers()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/player/search"]["get"]
+    update:
+      x-speakeasy-name-override: search
+    x-speakeasy-metadata:
+      after: sdk.player.search()
+      before: sdk.Player.get_/v1/player/search()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/admin/add"]["post"]
+    update:
+      x-speakeasy-name-override: addAdmin
+    x-speakeasy-metadata:
+      after: sdk.server.addAdmin()
+      before: sdk.Server.post_/v1/server/admin/add()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
+  - target: $["paths"]["/v1/server/ban"]["get"]
+    update:
+      x-speakeasy-name-override: getBan
+    x-speakeasy-metadata:
+      after: sdk.server.getBan()
+      before: sdk.Server.get_/v1/server/ban()
+      created_at: 1766981671611
+      reviewed_at: 1766981754268
+      type: method-name
