@@ -3,9 +3,9 @@ speakeasyVersion: latest
 sources:
     WaveShield API:
         inputs:
-            - location: ..\openapi.yaml
+            - location: ../openapi.yaml
         overlays:
-            - location: .speakeasy\speakeasy-modifications-overlay.yaml
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
         output: .speakeasy/out.openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/waveshield/api/wave-shield-api
