@@ -1,0 +1,42 @@
+speakeasyVersion: 1.680.3
+sources:
+    WaveShield API:
+        sourceNamespace: wave-shield-api
+        sourceRevisionDigest: sha256:1a52ea5c2d3808d09db6786a0eef0b363d7007d02083551a4cd3fc1990868a19
+        sourceBlobDigest: sha256:5e4220899ecf4ec9d9f3e80bb13d139c5b71386d0ab9c1d5b2b5b38b406ba572
+        tags:
+            - latest
+            - 1.0.0
+targets:
+    wave-shield:
+        source: WaveShield API
+        sourceNamespace: wave-shield-api
+        sourceRevisionDigest: sha256:1a52ea5c2d3808d09db6786a0eef0b363d7007d02083551a4cd3fc1990868a19
+        sourceBlobDigest: sha256:5e4220899ecf4ec9d9f3e80bb13d139c5b71386d0ab9c1d5b2b5b38b406ba572
+        codeSamplesNamespace: wave-shield-api-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:d4e9344a86ab5aa47969ea3cb05e66f910e8d0090d9ad1ab43a7012e0b94f489
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        WaveShield API:
+            inputs:
+                - location: ./openapi.yaml
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            output: .speakeasy/out.openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/waveshield/api/wave-shield-api
+    targets:
+        wave-shield:
+            target: typescript
+            source: WaveShield API
+            publish:
+                npm:
+                    token: $npm_token
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/waveshield/api/wave-shield-api-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false
