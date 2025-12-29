@@ -13,6 +13,9 @@ targets:
     wave-shield:
         target: typescript
         source: WaveShield API
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/waveshield/api/wave-shield-api-typescript-code-samples
