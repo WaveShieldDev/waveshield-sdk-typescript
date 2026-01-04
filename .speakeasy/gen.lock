@@ -3,20 +3,22 @@ id: bb9fbe39-0cc0-477c-83ed-4287efb73030
 management:
   docChecksum: cbdbb55b781de735d194bd761a125aeb
   docVersion: 1.0.0
-  speakeasyVersion: 1.680.3
-  generationVersion: 2.788.5
-  releaseVersion: 0.1.3
-  configChecksum: 303b383000c4e13c9eb1b790381dffa0
+  speakeasyVersion: 1.680.12
+  generationVersion: 2.788.15
+  releaseVersion: 0.1.4
+  configChecksum: 80d4b4aed6b4ca9b2bb5b4aad0ed60fc
+  repoURL: https://github.com/WaveShieldDev/waveshield-sdk-typescript.git
+  installationURL: https://github.com/WaveShieldDev/waveshield-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: dafb8776-49d1-498f-9203-bd545e3dcb54
-  pristine_commit_hash: 5ee899f3270e988c66dd54438ab32f6af9262f00
-  pristine_tree_hash: 322c6ebfe48cb9d159f5dabacfe558e22c45a235
+  generation_id: 7b31ea93-c758-4619-aead-f0027a25af7d
+  pristine_commit_hash: 2d17cc418a934f234f098a1b68aac5d0944551a3
+  pristine_tree_hash: 7cb5556338cfe6b08068a9c427730ec6a1c73d31
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.26.16
+    core: 3.26.17
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.1
     enumUnions: 0.1.0
@@ -33,8 +35,8 @@ features:
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
-    last_write_checksum: sha1:b6564d2a7c8ae764fff6d1b4666dcd787210a000
-    pristine_git_object: cdef18c30e383534a868742e1b9148f2670606f9
+    last_write_checksum: sha1:667cae9c93d407d906714e48ec0febb8d59b2190
+    pristine_git_object: 24de35b7489d0890a9545cb5c0202635e13fd74b
   .devcontainer/devcontainer.json:
     id: b34062a34eb1
     last_write_checksum: sha1:d0b15193202c961e7d1875864ddb15f9d17c84dd
@@ -621,12 +623,12 @@ trackedFiles:
     pristine_git_object: 68d3ec3935f19be0925166a2932fa2eea594e8aa
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:7ba0bcca5e9b667f90d53e0e1011e2983ba9f142
-    pristine_git_object: 0be6c8d07ed9db40567193761408517413b15688
+    last_write_checksum: sha1:341b4837c5e77bd5105602ee5be24727f86a79b9
+    pristine_git_object: 729d4507ffadf59b215ccce148f876bd6eeb09db
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:89848460ca21382d1f9ac907b8526873dd31a30e
-    pristine_git_object: a1f8779fcd95fe7a9f3d309a5d7491a2ccb60a08
+    last_write_checksum: sha1:bdfde4eb361d0a7804de4466d7c30be755928031
+    pristine_git_object: c412476e7d7badc56425720918ec45eb00f50be5
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:c9afa55f684e53734a7a103bcd1c4f2ece9ec0b7
@@ -805,8 +807,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:c02d3f05d61610ba4bfc4726fe6f293ec30e0cac
-    pristine_git_object: 2d455d61317a9b2ca66b72d52b9be35c5e237faa
+    last_write_checksum: sha1:1a6db9141d02eb6420811787e3db75c266167a73
+    pristine_git_object: 0b68163cbda0187bb0f4f6250afb11b86295f8f4
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
