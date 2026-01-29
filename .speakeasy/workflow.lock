@@ -1,20 +1,21 @@
-speakeasyVersion: 1.680.3
+speakeasyVersion: 1.700.2
 sources:
     WaveShield API:
         sourceNamespace: wave-shield-api
-        sourceRevisionDigest: sha256:1a52ea5c2d3808d09db6786a0eef0b363d7007d02083551a4cd3fc1990868a19
+        sourceRevisionDigest: sha256:49e600cf6eafc2602bef1b4490724feae3a2bfd04d69a14260eb89ed1f7ea3b3
         sourceBlobDigest: sha256:5e4220899ecf4ec9d9f3e80bb13d139c5b71386d0ab9c1d5b2b5b38b406ba572
         tags:
             - latest
+            - speakeasy-sdk-regen-1766985461
             - 1.0.0
 targets:
     wave-shield:
         source: WaveShield API
         sourceNamespace: wave-shield-api
-        sourceRevisionDigest: sha256:1a52ea5c2d3808d09db6786a0eef0b363d7007d02083551a4cd3fc1990868a19
+        sourceRevisionDigest: sha256:49e600cf6eafc2602bef1b4490724feae3a2bfd04d69a14260eb89ed1f7ea3b3
         sourceBlobDigest: sha256:5e4220899ecf4ec9d9f3e80bb13d139c5b71386d0ab9c1d5b2b5b38b406ba572
         codeSamplesNamespace: wave-shield-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:d4e9344a86ab5aa47969ea3cb05e66f910e8d0090d9ad1ab43a7012e0b94f489
+        codeSamplesRevisionDigest: sha256:0bc30aeef58881e42ad00d1f0ed7ac4ec78e1cc0b09c175bc72328e810474a39
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
