@@ -3,20 +3,22 @@ id: bb9fbe39-0cc0-477c-83ed-4287efb73030
 management:
   docChecksum: cbdbb55b781de735d194bd761a125aeb
   docVersion: 1.0.0
-  speakeasyVersion: 1.680.3
-  generationVersion: 2.788.5
-  releaseVersion: 0.1.3
-  configChecksum: 303b383000c4e13c9eb1b790381dffa0
+  speakeasyVersion: 1.700.2
+  generationVersion: 2.801.2
+  releaseVersion: 0.1.4
+  configChecksum: dfc2bea676a18cc8c9c15af04bbd6d0e
+  repoURL: https://github.com/WaveShieldDev/waveshield-sdk-typescript.git
+  installationURL: https://github.com/WaveShieldDev/waveshield-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: dafb8776-49d1-498f-9203-bd545e3dcb54
-  pristine_commit_hash: 5ee899f3270e988c66dd54438ab32f6af9262f00
-  pristine_tree_hash: 322c6ebfe48cb9d159f5dabacfe558e22c45a235
+  generation_id: 46a09a05-5410-41a6-ab1f-d6e1cd11b7d2
+  pristine_commit_hash: b78093b15e1f6bd903848b14888f30e77cabc581
+  pristine_tree_hash: 9ef36115e17d8c9f5525570f0c09a11101ef6c04
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.26.16
+    core: 3.26.23
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.1
     enumUnions: 0.1.0
@@ -33,8 +35,8 @@ features:
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
-    last_write_checksum: sha1:b6564d2a7c8ae764fff6d1b4666dcd787210a000
-    pristine_git_object: cdef18c30e383534a868742e1b9148f2670606f9
+    last_write_checksum: sha1:667cae9c93d407d906714e48ec0febb8d59b2190
+    pristine_git_object: 24de35b7489d0890a9545cb5c0202635e13fd74b
   .devcontainer/devcontainer.json:
     id: b34062a34eb1
     last_write_checksum: sha1:d0b15193202c961e7d1875864ddb15f9d17c84dd
@@ -621,12 +623,12 @@ trackedFiles:
     pristine_git_object: 68d3ec3935f19be0925166a2932fa2eea594e8aa
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:7ba0bcca5e9b667f90d53e0e1011e2983ba9f142
-    pristine_git_object: 0be6c8d07ed9db40567193761408517413b15688
+    last_write_checksum: sha1:341b4837c5e77bd5105602ee5be24727f86a79b9
+    pristine_git_object: 729d4507ffadf59b215ccce148f876bd6eeb09db
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:89848460ca21382d1f9ac907b8526873dd31a30e
-    pristine_git_object: a1f8779fcd95fe7a9f3d309a5d7491a2ccb60a08
+    last_write_checksum: sha1:bdfde4eb361d0a7804de4466d7c30be755928031
+    pristine_git_object: c412476e7d7badc56425720918ec45eb00f50be5
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:c9afa55f684e53734a7a103bcd1c4f2ece9ec0b7
@@ -785,8 +787,8 @@ trackedFiles:
     pristine_git_object: 6078490b881a9600d20ca51000a2ab754a3e1bc6
   src/hooks/hooks.ts:
     id: a2463fc6f69b
-    last_write_checksum: sha1:7dd975bbcc46a32dd394f86a4652b74ecc70d874
-    pristine_git_object: 7ed9e0445ac189e0f90687c6ef602212702bde90
+    last_write_checksum: sha1:3a90d88b4c6c07247db8e5f6441a79538232394e
+    pristine_git_object: 94ad0a323123b34dc638717c5d67a3c23c54d5c6
   src/hooks/index.ts:
     id: 5f2dab62b520
     last_write_checksum: sha1:1a11c073a6cd792932218e1d4ed36b8567bad8ef
@@ -805,8 +807,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:c02d3f05d61610ba4bfc4726fe6f293ec30e0cac
-    pristine_git_object: 2d455d61317a9b2ca66b72d52b9be35c5e237faa
+    last_write_checksum: sha1:54adde5a441ec04ce119b04f8e877b12bb45941c
+    pristine_git_object: 3e0f946031462f41f09863ea25aad0137fa95b16
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -853,8 +855,8 @@ trackedFiles:
     pristine_git_object: 61d7649b3d804f5c3ce4b2e3f7cc7ab8d087c4e1
   src/lib/sdks.ts:
     id: 8a6d91f1218d
-    last_write_checksum: sha1:9716dfab1669821b30b725196422faaefb53bb49
-    pristine_git_object: 698f95540a5cc9ffe4b2f96a0a582cc41c33c690
+    last_write_checksum: sha1:0489fcda80da9efa9394787210effa7609ac298e
+    pristine_git_object: 390cfdeb01c1acc45660563c88af93068998722d
   src/lib/security.ts:
     id: 0502afa7922e
     last_write_checksum: sha1:c6f389b8b83c310eb72bc1341baa1d3ee391b1b9
