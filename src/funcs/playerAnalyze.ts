@@ -98,7 +98,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/player/{identifier}/analysis")(pathParams);
 
   const headers = new Headers(compactMap({

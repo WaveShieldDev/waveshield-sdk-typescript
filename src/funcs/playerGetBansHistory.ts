@@ -96,7 +96,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/player/{identifier}/bans-history")(pathParams);
 
   const headers = new Headers(compactMap({
