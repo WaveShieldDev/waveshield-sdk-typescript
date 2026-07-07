@@ -1,9 +1,9 @@
-speakeasyVersion: 1.680.3
+speakeasyVersion: 1.789.0
 sources:
     WaveShield API:
         sourceNamespace: wave-shield-api
-        sourceRevisionDigest: sha256:1a52ea5c2d3808d09db6786a0eef0b363d7007d02083551a4cd3fc1990868a19
-        sourceBlobDigest: sha256:5e4220899ecf4ec9d9f3e80bb13d139c5b71386d0ab9c1d5b2b5b38b406ba572
+        sourceRevisionDigest: sha256:6f8c0949d81930f4091b84b8700c784595000be39c3d27fdc21f2bd416451b60
+        sourceBlobDigest: sha256:8245e990802889d893fe64f99f5c56f54fe50534768bf82ac80e9d64618ed33f
         tags:
             - latest
             - 1.0.0
@@ -11,10 +11,10 @@ targets:
     wave-shield:
         source: WaveShield API
         sourceNamespace: wave-shield-api
-        sourceRevisionDigest: sha256:1a52ea5c2d3808d09db6786a0eef0b363d7007d02083551a4cd3fc1990868a19
-        sourceBlobDigest: sha256:5e4220899ecf4ec9d9f3e80bb13d139c5b71386d0ab9c1d5b2b5b38b406ba572
+        sourceRevisionDigest: sha256:6f8c0949d81930f4091b84b8700c784595000be39c3d27fdc21f2bd416451b60
+        sourceBlobDigest: sha256:8245e990802889d893fe64f99f5c56f54fe50534768bf82ac80e9d64618ed33f
         codeSamplesNamespace: wave-shield-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:d4e9344a86ab5aa47969ea3cb05e66f910e8d0090d9ad1ab43a7012e0b94f489
+        codeSamplesRevisionDigest: sha256:0bc30aeef58881e42ad00d1f0ed7ac4ec78e1cc0b09c175bc72328e810474a39
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
