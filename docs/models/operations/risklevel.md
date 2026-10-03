@@ -6,11 +6,11 @@
 import { RiskLevel } from "waveshield/models/operations";
 
 let value: RiskLevel = "CRITICAL";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "LOW" | "MEDIUM" | "HIGH" | "CRITICAL" | Unrecognized<string>
