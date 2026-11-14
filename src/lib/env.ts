@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v4-mini";
-import { dlv } from "./dlv.js";
 
 export interface Env {
   WAVESHIELD_API_KEY_AUTH?: string | undefined;
@@ -16,8 +15,14 @@ export const envSchema: z.ZodMiniType<Env, unknown> = z.object({
   WAVESHIELD_API_KEY_AUTH: z.optional(z.string()),
   WAVESHIELD_API_SECRET_AUTH: z.optional(z.string()),
 
-  WAVESHIELD_DEBUG: z.optional(z.coerce.boolean()),
+  WAVESHIELD_DEBUG: z.optional(z.pipe(z.unknown(), z.transform(parseEnvFlag))),
 });
+
+function parseEnvFlag(value: unknown): boolean {
+  return ["true", "1", "yes", "on"].includes(
+    String(value).trim().toLowerCase(),
+  );
+}
 
 /**
  * Checks for the existence of the Deno global object to determine the environment.
@@ -40,11 +45,16 @@ export function env(): Env {
     return envMemo;
   }
 
+  const globals = globalThis as {
+    Deno?: { env?: { toObject?: () => Record<string, string | undefined> } };
+    process?: { env?: Record<string, string | undefined> };
+  };
+
   let envObject: Record<string, unknown> = {};
   if (isDeno()) {
-    envObject = (globalThis as any).Deno?.env?.toObject?.() ?? {};
+    envObject = globals.Deno?.env?.toObject?.() ?? {};
   } else {
-    envObject = dlv(globalThis, "process.env") ?? {};
+    envObject = globals.process?.env ?? {};
   }
 
   envMemo = envSchema.parse(envObject);
