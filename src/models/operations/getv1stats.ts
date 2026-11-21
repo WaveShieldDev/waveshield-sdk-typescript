@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -42,10 +42,13 @@ export type GetV1StatsResponse = {
 };
 
 /** @internal */
-export const Servers$inboundSchema: z.ZodMiniType<Servers, unknown> = z.object({
-  total: types.optional(types.number()),
-  online: types.optional(types.number()),
-});
+export const Servers$inboundSchema: z.ZodMiniType<Servers, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      total: types.optional(types.number()),
+      online: types.optional(types.number()),
+    })
+  );
 
 export function serversFromJSON(
   jsonString: string,
@@ -58,19 +61,22 @@ export function serversFromJSON(
 }
 
 /** @internal */
-export const Players$inboundSchema: z.ZodMiniType<Players, unknown> = z.pipe(
-  z.object({
-    tracked_total: types.optional(types.number()),
-    online: types.optional(types.number()),
-    banned_total: types.optional(types.number()),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      "tracked_total": "trackedTotal",
-      "banned_total": "bannedTotal",
-    });
-  }),
-);
+export const Players$inboundSchema: z.ZodMiniType<Players, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.pipe(
+      z.object({
+        tracked_total: types.optional(types.number()),
+        online: types.optional(types.number()),
+        banned_total: types.optional(types.number()),
+      }),
+      z.transform((v) => {
+        return remap$(v, {
+          "tracked_total": "trackedTotal",
+          "banned_total": "bannedTotal",
+        });
+      }),
+    )
+  );
 
 export function playersFromJSON(
   jsonString: string,
@@ -83,18 +89,20 @@ export function playersFromJSON(
 }
 
 /** @internal */
-export const Identifiers$inboundSchema: z.ZodMiniType<Identifiers, unknown> = z
-  .pipe(
-    z.object({
-      tracked_total: types.optional(types.number()),
-      banned_total: types.optional(types.number()),
-    }),
-    z.transform((v) => {
-      return remap$(v, {
-        "tracked_total": "trackedTotal",
-        "banned_total": "bannedTotal",
-      });
-    }),
+export const Identifiers$inboundSchema: z.ZodMiniType<Identifiers, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.pipe(
+      z.object({
+        tracked_total: types.optional(types.number()),
+        banned_total: types.optional(types.number()),
+      }),
+      z.transform((v) => {
+        return remap$(v, {
+          "tracked_total": "trackedTotal",
+          "banned_total": "bannedTotal",
+        });
+      }),
+    )
   );
 
 export function identifiersFromJSON(
@@ -108,19 +116,22 @@ export function identifiersFromJSON(
 }
 
 /** @internal */
-export const System$inboundSchema: z.ZodMiniType<System, unknown> = z.pipe(
-  z.object({
-    version: types.optional(types.string()),
-    bans_issued: types.optional(types.number()),
-    last_update: types.optional(types.string()),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      "bans_issued": "bansIssued",
-      "last_update": "lastUpdate",
-    });
-  }),
-);
+export const System$inboundSchema: z.ZodMiniType<System, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.pipe(
+      z.object({
+        version: types.optional(types.string()),
+        bans_issued: types.optional(types.number()),
+        last_update: types.optional(types.string()),
+      }),
+      z.transform((v) => {
+        return remap$(v, {
+          "bans_issued": "bansIssued",
+          "last_update": "lastUpdate",
+        });
+      }),
+    )
+  );
 
 export function systemFromJSON(
   jsonString: string,
@@ -136,12 +147,14 @@ export function systemFromJSON(
 export const GetV1StatsResponse$inboundSchema: z.ZodMiniType<
   GetV1StatsResponse,
   unknown
-> = z.object({
-  servers: types.optional(z.lazy(() => Servers$inboundSchema)),
-  players: types.optional(z.lazy(() => Players$inboundSchema)),
-  identifiers: types.optional(z.lazy(() => Identifiers$inboundSchema)),
-  system: types.optional(z.lazy(() => System$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    servers: types.optional(z.lazy(() => Servers$inboundSchema)),
+    players: types.optional(z.lazy(() => Players$inboundSchema)),
+    identifiers: types.optional(z.lazy(() => Identifiers$inboundSchema)),
+    system: types.optional(z.lazy(() => System$inboundSchema)),
+  })
+);
 
 export function getV1StatsResponseFromJSON(
   jsonString: string,

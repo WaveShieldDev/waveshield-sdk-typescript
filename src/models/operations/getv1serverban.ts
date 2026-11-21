@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -44,9 +44,11 @@ export type GetV1ServerBanRequest$Outbound = {
 export const GetV1ServerBanRequest$outboundSchema: z.ZodMiniType<
   GetV1ServerBanRequest$Outbound,
   GetV1ServerBanRequest
-> = z.object({
-  banId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    banId: z.string(),
+  })
+);
 
 export function getV1ServerBanRequestToJSON(
   getV1ServerBanRequest: GetV1ServerBanRequest,
@@ -60,7 +62,7 @@ export function getV1ServerBanRequestToJSON(
 export const GetV1ServerBanDetails$inboundSchema: z.ZodMiniType<
   GetV1ServerBanDetails,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function getV1ServerBanDetailsFromJSON(
   jsonString: string,
@@ -76,20 +78,22 @@ export function getV1ServerBanDetailsFromJSON(
 export const GetV1ServerBanResponse$inboundSchema: z.ZodMiniType<
   GetV1ServerBanResponse,
   unknown
-> = z.object({
-  id: types.optional(types.string()),
-  player: types.optional(types.string()),
-  reason: types.optional(types.string()),
-  details: types.optional(z.lazy(() => GetV1ServerBanDetails$inboundSchema)),
-  evidence: types.optional(types.string()),
-  bannedAt: types.optional(types.date()),
-  expiresAt: types.optional(types.date()),
-  bannedBy: types.optional(types.string()),
-  playTime: types.optional(types.number()),
-  identifiers: types.optional(z.array(types.string())),
-  oldIdentifiers: types.optional(z.array(types.string())),
-  oldNames: types.optional(z.array(types.string())),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: types.optional(types.string()),
+    player: types.optional(types.string()),
+    reason: types.optional(types.string()),
+    details: types.optional(z.lazy(() => GetV1ServerBanDetails$inboundSchema)),
+    evidence: types.optional(types.string()),
+    bannedAt: types.optional(types.date()),
+    expiresAt: types.optional(types.date()),
+    bannedBy: types.optional(types.string()),
+    playTime: types.optional(types.number()),
+    identifiers: types.optional(z.array(types.string())),
+    oldIdentifiers: types.optional(z.array(types.string())),
+    oldNames: types.optional(z.array(types.string())),
+  })
+);
 
 export function getV1ServerBanResponseFromJSON(
   jsonString: string,

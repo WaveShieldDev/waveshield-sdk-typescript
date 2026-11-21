@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,9 +29,11 @@ export type PostV1ServerScreenshotRequest$Outbound = {
 export const PostV1ServerScreenshotRequest$outboundSchema: z.ZodMiniType<
   PostV1ServerScreenshotRequest$Outbound,
   PostV1ServerScreenshotRequest
-> = z.object({
-  playerId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    playerId: z.string(),
+  })
+);
 
 export function postV1ServerScreenshotRequestToJSON(
   postV1ServerScreenshotRequest: PostV1ServerScreenshotRequest,
@@ -47,10 +49,12 @@ export function postV1ServerScreenshotRequestToJSON(
 export const PostV1ServerScreenshotResponse$inboundSchema: z.ZodMiniType<
   PostV1ServerScreenshotResponse,
   unknown
-> = z.object({
-  success: types.optional(types.boolean()),
-  screenshotUrl: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: types.optional(types.boolean()),
+    screenshotUrl: types.optional(types.string()),
+  })
+);
 
 export function postV1ServerScreenshotResponseFromJSON(
   jsonString: string,

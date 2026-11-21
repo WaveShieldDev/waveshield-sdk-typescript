@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GetV1PlayerIdentifierAnalysisRequest = {
   identifier: string;
@@ -17,9 +18,11 @@ export type GetV1PlayerIdentifierAnalysisRequest$Outbound = {
 export const GetV1PlayerIdentifierAnalysisRequest$outboundSchema: z.ZodMiniType<
   GetV1PlayerIdentifierAnalysisRequest$Outbound,
   GetV1PlayerIdentifierAnalysisRequest
-> = z.object({
-  identifier: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identifier: z.string(),
+  })
+);
 
 export function getV1PlayerIdentifierAnalysisRequestToJSON(
   getV1PlayerIdentifierAnalysisRequest: GetV1PlayerIdentifierAnalysisRequest,

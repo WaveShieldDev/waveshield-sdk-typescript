@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import * as types from "../types/primitives.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -16,13 +16,15 @@ export type Pagination = {
 };
 
 /** @internal */
-export const Pagination$inboundSchema: z.ZodMiniType<Pagination, unknown> = z
-  .object({
-    page: types.optional(types.number()),
-    limit: types.optional(types.number()),
-    total: types.optional(types.number()),
-    totalPages: types.optional(types.number()),
-  });
+export const Pagination$inboundSchema: z.ZodMiniType<Pagination, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      page: types.optional(types.number()),
+      limit: types.optional(types.number()),
+      total: types.optional(types.number()),
+      totalPages: types.optional(types.number()),
+    })
+  );
 
 export function paginationFromJSON(
   jsonString: string,

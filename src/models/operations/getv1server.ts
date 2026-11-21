@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -45,16 +45,19 @@ export type GetV1ServerResponse = {
 };
 
 /** @internal */
-export const Status$inboundSchema: z.ZodMiniType<Status, unknown> = openEnums
-  .inboundSchema(Status);
+export const Status$inboundSchema: z.ZodMiniType<Status, unknown> =
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Status));
 
 /** @internal */
-export const Info$inboundSchema: z.ZodMiniType<Info, unknown> = z.object({
-  name: types.optional(types.string()),
-  ip: types.optional(types.string()),
-  banner: z.optional(z.nullable(types.string())),
-  version: types.optional(types.string()),
-});
+export const Info$inboundSchema: z.ZodMiniType<Info, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: types.optional(types.string()),
+      ip: types.optional(types.string()),
+      banner: z.optional(z.nullable(types.string())),
+      version: types.optional(types.string()),
+    })
+  );
 
 export function infoFromJSON(
   jsonString: string,
@@ -70,11 +73,13 @@ export function infoFromJSON(
 export const GetV1ServerStats$inboundSchema: z.ZodMiniType<
   GetV1ServerStats,
   unknown
-> = z.object({
-  currentPlayers: types.optional(types.number()),
-  maxSlots: types.optional(types.number()),
-  lastSeen: types.optional(types.date()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currentPlayers: types.optional(types.number()),
+    maxSlots: types.optional(types.number()),
+    lastSeen: types.optional(types.date()),
+  })
+);
 
 export function getV1ServerStatsFromJSON(
   jsonString: string,
@@ -88,9 +93,11 @@ export function getV1ServerStatsFromJSON(
 
 /** @internal */
 export const Subscription$inboundSchema: z.ZodMiniType<Subscription, unknown> =
-  z.object({
-    expiresAt: types.optional(types.date()),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      expiresAt: types.optional(types.date()),
+    })
+  );
 
 export function subscriptionFromJSON(
   jsonString: string,
@@ -106,12 +113,14 @@ export function subscriptionFromJSON(
 export const GetV1ServerResponse$inboundSchema: z.ZodMiniType<
   GetV1ServerResponse,
   unknown
-> = z.object({
-  status: types.optional(Status$inboundSchema),
-  info: types.optional(z.lazy(() => Info$inboundSchema)),
-  stats: types.optional(z.lazy(() => GetV1ServerStats$inboundSchema)),
-  subscription: types.optional(z.lazy(() => Subscription$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: types.optional(Status$inboundSchema),
+    info: types.optional(z.lazy(() => Info$inboundSchema)),
+    stats: types.optional(z.lazy(() => GetV1ServerStats$inboundSchema)),
+    subscription: types.optional(z.lazy(() => Subscription$inboundSchema)),
+  })
+);
 
 export function getV1ServerResponseFromJSON(
   jsonString: string,

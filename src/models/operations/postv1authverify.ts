@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -40,14 +40,17 @@ export type PostV1AuthVerifyResponse = {
 };
 
 /** @internal */
-export const Key$inboundSchema: z.ZodMiniType<Key, unknown> = z.object({
-  id: types.optional(types.string()),
-  name: types.optional(types.string()),
-  tier: types.optional(types.string()),
-  status: types.optional(types.string()),
-  createdAt: types.optional(types.date()),
-  expiresAt: types.optional(types.date()),
-});
+export const Key$inboundSchema: z.ZodMiniType<Key, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: types.optional(types.string()),
+      name: types.optional(types.string()),
+      tier: types.optional(types.string()),
+      status: types.optional(types.string()),
+      createdAt: types.optional(types.date()),
+      expiresAt: types.optional(types.date()),
+    })
+  );
 
 export function keyFromJSON(
   jsonString: string,
@@ -60,8 +63,8 @@ export function keyFromJSON(
 }
 
 /** @internal */
-export const Permissions$inboundSchema: z.ZodMiniType<Permissions, unknown> = z
-  .object({});
+export const Permissions$inboundSchema: z.ZodMiniType<Permissions, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function permissionsFromJSON(
   jsonString: string,
@@ -74,10 +77,12 @@ export function permissionsFromJSON(
 }
 
 /** @internal */
-export const RateLimit$inboundSchema: z.ZodMiniType<RateLimit, unknown> = z
-  .object({
-    limit: types.optional(types.number()),
-  });
+export const RateLimit$inboundSchema: z.ZodMiniType<RateLimit, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      limit: types.optional(types.number()),
+    })
+  );
 
 export function rateLimitFromJSON(
   jsonString: string,
@@ -93,10 +98,12 @@ export function rateLimitFromJSON(
 export const PostV1AuthVerifyMeta$inboundSchema: z.ZodMiniType<
   PostV1AuthVerifyMeta,
   unknown
-> = z.object({
-  requestId: types.optional(types.string()),
-  timestamp: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requestId: types.optional(types.string()),
+    timestamp: types.optional(types.string()),
+  })
+);
 
 export function postV1AuthVerifyMetaFromJSON(
   jsonString: string,
@@ -112,13 +119,15 @@ export function postV1AuthVerifyMetaFromJSON(
 export const PostV1AuthVerifyResponse$inboundSchema: z.ZodMiniType<
   PostV1AuthVerifyResponse,
   unknown
-> = z.object({
-  valid: types.optional(types.boolean()),
-  key: types.optional(z.lazy(() => Key$inboundSchema)),
-  permissions: types.optional(z.lazy(() => Permissions$inboundSchema)),
-  rateLimit: types.optional(z.lazy(() => RateLimit$inboundSchema)),
-  meta: types.optional(z.lazy(() => PostV1AuthVerifyMeta$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    valid: types.optional(types.boolean()),
+    key: types.optional(z.lazy(() => Key$inboundSchema)),
+    permissions: types.optional(z.lazy(() => Permissions$inboundSchema)),
+    rateLimit: types.optional(z.lazy(() => RateLimit$inboundSchema)),
+    meta: types.optional(z.lazy(() => PostV1AuthVerifyMeta$inboundSchema)),
+  })
+);
 
 export function postV1AuthVerifyResponseFromJSON(
   jsonString: string,

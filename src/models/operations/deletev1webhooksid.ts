@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteV1WebhooksIdRequest = {
   id: string;
@@ -17,9 +18,11 @@ export type DeleteV1WebhooksIdRequest$Outbound = {
 export const DeleteV1WebhooksIdRequest$outboundSchema: z.ZodMiniType<
   DeleteV1WebhooksIdRequest$Outbound,
   DeleteV1WebhooksIdRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function deleteV1WebhooksIdRequestToJSON(
   deleteV1WebhooksIdRequest: DeleteV1WebhooksIdRequest,
