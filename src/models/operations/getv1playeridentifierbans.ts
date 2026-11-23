@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,9 +30,11 @@ export type GetV1PlayerIdentifierBansRequest$Outbound = {
 export const GetV1PlayerIdentifierBansRequest$outboundSchema: z.ZodMiniType<
   GetV1PlayerIdentifierBansRequest$Outbound,
   GetV1PlayerIdentifierBansRequest
-> = z.object({
-  identifier: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identifier: z.string(),
+  })
+);
 
 export function getV1PlayerIdentifierBansRequestToJSON(
   getV1PlayerIdentifierBansRequest: GetV1PlayerIdentifierBansRequest,
@@ -48,10 +50,12 @@ export function getV1PlayerIdentifierBansRequestToJSON(
 export const GetV1PlayerIdentifierBansResponse$inboundSchema: z.ZodMiniType<
   GetV1PlayerIdentifierBansResponse,
   unknown
-> = z.object({
-  count: types.optional(types.number()),
-  bans: types.optional(z.array(models.BanPublic$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: types.optional(types.number()),
+    bans: types.optional(z.array(models.BanPublic$inboundSchema)),
+  })
+);
 
 export function getV1PlayerIdentifierBansResponseFromJSON(
   jsonString: string,

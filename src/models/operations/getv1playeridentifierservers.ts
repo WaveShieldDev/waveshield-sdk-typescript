@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -36,9 +36,11 @@ export type GetV1PlayerIdentifierServersRequest$Outbound = {
 export const GetV1PlayerIdentifierServersRequest$outboundSchema: z.ZodMiniType<
   GetV1PlayerIdentifierServersRequest$Outbound,
   GetV1PlayerIdentifierServersRequest
-> = z.object({
-  identifier: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identifier: z.string(),
+  })
+);
 
 export function getV1PlayerIdentifierServersRequestToJSON(
   getV1PlayerIdentifierServersRequest: GetV1PlayerIdentifierServersRequest,
@@ -54,13 +56,15 @@ export function getV1PlayerIdentifierServersRequestToJSON(
 export const GetV1PlayerIdentifierServersServer$inboundSchema: z.ZodMiniType<
   GetV1PlayerIdentifierServersServer,
   unknown
-> = z.object({
-  id: types.optional(types.string()),
-  name: types.optional(types.string()),
-  firstJoin: types.optional(types.date()),
-  lastJoin: types.optional(types.date()),
-  playTime: types.optional(types.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: types.optional(types.string()),
+    name: types.optional(types.string()),
+    firstJoin: types.optional(types.date()),
+    lastJoin: types.optional(types.date()),
+    playTime: types.optional(types.number()),
+  })
+);
 
 export function getV1PlayerIdentifierServersServerFromJSON(
   jsonString: string,
@@ -77,11 +81,13 @@ export function getV1PlayerIdentifierServersServerFromJSON(
 export const GetV1PlayerIdentifierServersResponse$inboundSchema: z.ZodMiniType<
   GetV1PlayerIdentifierServersResponse,
   unknown
-> = z.object({
-  servers: types.optional(
-    z.array(z.lazy(() => GetV1PlayerIdentifierServersServer$inboundSchema)),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    servers: types.optional(
+      z.array(z.lazy(() => GetV1PlayerIdentifierServersServer$inboundSchema)),
+    ),
+  })
+);
 
 export function getV1PlayerIdentifierServersResponseFromJSON(
   jsonString: string,

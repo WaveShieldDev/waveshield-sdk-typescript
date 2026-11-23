@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -34,7 +34,7 @@ export type PostV1ServerBanOfflineDetails$Outbound = {};
 export const PostV1ServerBanOfflineDetails$outboundSchema: z.ZodMiniType<
   PostV1ServerBanOfflineDetails$Outbound,
   PostV1ServerBanOfflineDetails
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function postV1ServerBanOfflineDetailsToJSON(
   postV1ServerBanOfflineDetails: PostV1ServerBanOfflineDetails,
@@ -60,16 +60,18 @@ export type PostV1ServerBanOfflineRequest$Outbound = {
 export const PostV1ServerBanOfflineRequest$outboundSchema: z.ZodMiniType<
   PostV1ServerBanOfflineRequest$Outbound,
   PostV1ServerBanOfflineRequest
-> = z.object({
-  identifiers: z.optional(z.array(z.string())),
-  playerLicense: z.optional(z.string()),
-  reason: z.string(),
-  details: z.optional(
-    z.lazy(() => PostV1ServerBanOfflineDetails$outboundSchema),
-  ),
-  evidenceUrl: z.optional(z.string()),
-  by: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identifiers: z.optional(z.array(z.string())),
+    playerLicense: z.optional(z.string()),
+    reason: z.string(),
+    details: z.optional(
+      z.lazy(() => PostV1ServerBanOfflineDetails$outboundSchema),
+    ),
+    evidenceUrl: z.optional(z.string()),
+    by: z.optional(z.string()),
+  })
+);
 
 export function postV1ServerBanOfflineRequestToJSON(
   postV1ServerBanOfflineRequest: PostV1ServerBanOfflineRequest,
@@ -85,10 +87,12 @@ export function postV1ServerBanOfflineRequestToJSON(
 export const PostV1ServerBanOfflineResponse$inboundSchema: z.ZodMiniType<
   PostV1ServerBanOfflineResponse,
   unknown
-> = z.object({
-  success: types.optional(types.boolean()),
-  banId: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: types.optional(types.boolean()),
+    banId: types.optional(types.string()),
+  })
+);
 
 export function postV1ServerBanOfflineResponseFromJSON(
   jsonString: string,

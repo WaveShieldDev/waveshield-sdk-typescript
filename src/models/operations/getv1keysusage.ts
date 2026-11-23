@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -35,12 +35,15 @@ export type GetV1KeysUsageResponse = {
 };
 
 /** @internal */
-export const Usage$inboundSchema: z.ZodMiniType<Usage, unknown> = z.object({
-  current: types.optional(types.number()),
-  limit: types.optional(types.number()),
-  remaining: types.optional(types.number()),
-  percentage: types.optional(types.number()),
-});
+export const Usage$inboundSchema: z.ZodMiniType<Usage, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      current: types.optional(types.number()),
+      limit: types.optional(types.number()),
+      remaining: types.optional(types.number()),
+      percentage: types.optional(types.number()),
+    })
+  );
 
 export function usageFromJSON(
   jsonString: string,
@@ -53,10 +56,13 @@ export function usageFromJSON(
 }
 
 /** @internal */
-export const Period$inboundSchema: z.ZodMiniType<Period, unknown> = z.object({
-  resetDate: types.optional(types.date()),
-  daysRemaining: types.optional(types.number()),
-});
+export const Period$inboundSchema: z.ZodMiniType<Period, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      resetDate: types.optional(types.date()),
+      daysRemaining: types.optional(types.number()),
+    })
+  );
 
 export function periodFromJSON(
   jsonString: string,
@@ -69,11 +75,13 @@ export function periodFromJSON(
 }
 
 /** @internal */
-export const Lifetime$inboundSchema: z.ZodMiniType<Lifetime, unknown> = z
-  .object({
-    totalRequests: types.optional(types.number()),
-    lastUsedAt: types.optional(types.date()),
-  });
+export const Lifetime$inboundSchema: z.ZodMiniType<Lifetime, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      totalRequests: types.optional(types.number()),
+      lastUsedAt: types.optional(types.date()),
+    })
+  );
 
 export function lifetimeFromJSON(
   jsonString: string,
@@ -89,11 +97,13 @@ export function lifetimeFromJSON(
 export const GetV1KeysUsageResponse$inboundSchema: z.ZodMiniType<
   GetV1KeysUsageResponse,
   unknown
-> = z.object({
-  usage: types.optional(z.lazy(() => Usage$inboundSchema)),
-  period: types.optional(z.lazy(() => Period$inboundSchema)),
-  lifetime: types.optional(z.lazy(() => Lifetime$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    usage: types.optional(z.lazy(() => Usage$inboundSchema)),
+    period: types.optional(z.lazy(() => Period$inboundSchema)),
+    lifetime: types.optional(z.lazy(() => Lifetime$inboundSchema)),
+  })
+);
 
 export function getV1KeysUsageResponseFromJSON(
   jsonString: string,

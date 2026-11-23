@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -20,10 +20,12 @@ export type GetV1ServerPlayersResponse = {
 export const GetV1ServerPlayersResponse$inboundSchema: z.ZodMiniType<
   GetV1ServerPlayersResponse,
   unknown
-> = z.object({
-  count: types.optional(types.number()),
-  players: types.optional(z.array(z.record(z.string(), z.any()))),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: types.optional(types.number()),
+    players: types.optional(z.array(z.record(z.string(), z.any()))),
+  })
+);
 
 export function getV1ServerPlayersResponseFromJSON(
   jsonString: string,

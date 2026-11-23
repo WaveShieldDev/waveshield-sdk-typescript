@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -40,9 +40,11 @@ export const GetV1PlayerIdentifierThreatScoreRequest$outboundSchema:
   z.ZodMiniType<
     GetV1PlayerIdentifierThreatScoreRequest$Outbound,
     GetV1PlayerIdentifierThreatScoreRequest
-  > = z.object({
-    identifier: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      identifier: z.string(),
+    })
+  );
 
 export function getV1PlayerIdentifierThreatScoreRequestToJSON(
   getV1PlayerIdentifierThreatScoreRequest:
@@ -57,14 +59,17 @@ export function getV1PlayerIdentifierThreatScoreRequestToJSON(
 
 /** @internal */
 export const RiskLevel$inboundSchema: z.ZodMiniType<RiskLevel, unknown> =
-  openEnums.inboundSchema(RiskLevel);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(RiskLevel));
 
 /** @internal */
 export const GetV1PlayerIdentifierThreatScoreResponse$inboundSchema:
-  z.ZodMiniType<GetV1PlayerIdentifierThreatScoreResponse, unknown> = z.object({
-    score: types.optional(types.number()),
-    riskLevel: types.optional(RiskLevel$inboundSchema),
-  });
+  z.ZodMiniType<GetV1PlayerIdentifierThreatScoreResponse, unknown> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        score: types.optional(types.number()),
+        riskLevel: types.optional(RiskLevel$inboundSchema),
+      })
+    );
 
 export function getV1PlayerIdentifierThreatScoreResponseFromJSON(
   jsonString: string,

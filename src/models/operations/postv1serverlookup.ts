@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -34,9 +34,11 @@ export type PostV1ServerLookupRequest$Outbound = {
 export const PostV1ServerLookupRequest$outboundSchema: z.ZodMiniType<
   PostV1ServerLookupRequest$Outbound,
   PostV1ServerLookupRequest
-> = z.object({
-  identifier: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identifier: z.string(),
+  })
+);
 
 export function postV1ServerLookupRequestToJSON(
   postV1ServerLookupRequest: PostV1ServerLookupRequest,
@@ -50,16 +52,18 @@ export function postV1ServerLookupRequestToJSON(
 export const PostV1ServerLookupResponse$inboundSchema: z.ZodMiniType<
   PostV1ServerLookupResponse,
   unknown
-> = z.pipe(
-  z.object({
-    "...": types.optional(models.PlayerAnalysis$inboundSchema),
-    notes: types.optional(z.array(models.PlayerNote$inboundSchema)),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      "...": "dotDotDot",
-    });
-  }),
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.pipe(
+    z.object({
+      "...": types.optional(models.PlayerAnalysis$inboundSchema),
+      notes: types.optional(z.array(models.PlayerNote$inboundSchema)),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        "...": "dotDotDot",
+      });
+    }),
+  )
 );
 
 export function postV1ServerLookupResponseFromJSON(

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -32,10 +32,12 @@ export type GetV1ServerLogsRequest$Outbound = {
 export const GetV1ServerLogsRequest$outboundSchema: z.ZodMiniType<
   GetV1ServerLogsRequest$Outbound,
   GetV1ServerLogsRequest
-> = z.object({
-  limit: z.optional(z.int()),
-  type: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.optional(z.int()),
+    type: z.optional(z.string()),
+  })
+);
 
 export function getV1ServerLogsRequestToJSON(
   getV1ServerLogsRequest: GetV1ServerLogsRequest,
@@ -49,10 +51,12 @@ export function getV1ServerLogsRequestToJSON(
 export const GetV1ServerLogsResponse$inboundSchema: z.ZodMiniType<
   GetV1ServerLogsResponse,
   unknown
-> = z.object({
-  data: types.optional(z.array(models.ServerLog$inboundSchema)),
-  pagination: types.optional(models.Pagination$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: types.optional(z.array(models.ServerLog$inboundSchema)),
+    pagination: types.optional(models.Pagination$inboundSchema),
+  })
+);
 
 export function getV1ServerLogsResponseFromJSON(
   jsonString: string,

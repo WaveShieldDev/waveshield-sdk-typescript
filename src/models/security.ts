@@ -4,6 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 
 export type Security = {
   apiKeyAuth?: string | undefined;
@@ -20,17 +21,19 @@ export type Security$Outbound = {
 export const Security$outboundSchema: z.ZodMiniType<
   Security$Outbound,
   Security
-> = z.pipe(
-  z.object({
-    apiKeyAuth: z.optional(z.string()),
-    apiSecretAuth: z.optional(z.string()),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      apiKeyAuth: "ApiKeyAuth",
-      apiSecretAuth: "ApiSecretAuth",
-    });
-  }),
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.pipe(
+    z.object({
+      apiKeyAuth: z.optional(z.string()),
+      apiSecretAuth: z.optional(z.string()),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+        apiSecretAuth: "ApiSecretAuth",
+      });
+    }),
+  )
 );
 
 export function securityToJSON(security: Security): string {
