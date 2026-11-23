@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
@@ -35,9 +35,8 @@ export type GetV1BansTrendsResponse = {
 };
 
 /** @internal */
-export const Window$outboundSchema: z.ZodMiniEnum<typeof Window> = z.enum(
-  Window,
-);
+export const Window$outboundSchema: z.ZodMiniEnum<typeof Window> =
+  /* @__PURE__ */ lazySchema$(() => z.enum(Window));
 
 /** @internal */
 export type GetV1BansTrendsRequest$Outbound = {
@@ -48,9 +47,11 @@ export type GetV1BansTrendsRequest$Outbound = {
 export const GetV1BansTrendsRequest$outboundSchema: z.ZodMiniType<
   GetV1BansTrendsRequest$Outbound,
   GetV1BansTrendsRequest
-> = z.object({
-  window: z.optional(Window$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    window: z.optional(Window$outboundSchema),
+  })
+);
 
 export function getV1BansTrendsRequestToJSON(
   getV1BansTrendsRequest: GetV1BansTrendsRequest,
@@ -61,10 +62,13 @@ export function getV1BansTrendsRequestToJSON(
 }
 
 /** @internal */
-export const Trend$inboundSchema: z.ZodMiniType<Trend, unknown> = z.object({
-  reason: types.optional(types.string()),
-  count: types.optional(types.number()),
-});
+export const Trend$inboundSchema: z.ZodMiniType<Trend, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reason: types.optional(types.string()),
+      count: types.optional(types.number()),
+    })
+  );
 
 export function trendFromJSON(
   jsonString: string,
@@ -80,11 +84,13 @@ export function trendFromJSON(
 export const GetV1BansTrendsResponse$inboundSchema: z.ZodMiniType<
   GetV1BansTrendsResponse,
   unknown
-> = z.object({
-  window: types.optional(types.string()),
-  since: types.optional(types.string()),
-  trends: types.optional(z.array(z.lazy(() => Trend$inboundSchema))),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    window: types.optional(types.string()),
+    since: types.optional(types.string()),
+    trends: types.optional(z.array(z.lazy(() => Trend$inboundSchema))),
+  })
+);
 
 export function getV1BansTrendsResponseFromJSON(
   jsonString: string,

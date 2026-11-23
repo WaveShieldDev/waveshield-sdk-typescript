@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,11 +23,14 @@ export type GetV1ServerAdminsResponse = {
 };
 
 /** @internal */
-export const Admin$inboundSchema: z.ZodMiniType<Admin, unknown> = z.object({
-  discordId: types.optional(types.string()),
-  permissions: types.optional(z.array(types.string())),
-  addedAt: types.optional(types.date()),
-});
+export const Admin$inboundSchema: z.ZodMiniType<Admin, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      discordId: types.optional(types.string()),
+      permissions: types.optional(z.array(types.string())),
+      addedAt: types.optional(types.date()),
+    })
+  );
 
 export function adminFromJSON(
   jsonString: string,
@@ -43,10 +46,12 @@ export function adminFromJSON(
 export const GetV1ServerAdminsResponse$inboundSchema: z.ZodMiniType<
   GetV1ServerAdminsResponse,
   unknown
-> = z.object({
-  count: types.optional(types.number()),
-  admins: types.optional(z.array(z.lazy(() => Admin$inboundSchema))),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: types.optional(types.number()),
+    admins: types.optional(z.array(z.lazy(() => Admin$inboundSchema))),
+  })
+);
 
 export function getV1ServerAdminsResponseFromJSON(
   jsonString: string,

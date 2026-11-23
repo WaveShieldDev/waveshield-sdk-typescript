@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,9 +29,11 @@ export type PostV1ServerAdminRemoveRequest$Outbound = {
 export const PostV1ServerAdminRemoveRequest$outboundSchema: z.ZodMiniType<
   PostV1ServerAdminRemoveRequest$Outbound,
   PostV1ServerAdminRemoveRequest
-> = z.object({
-  discordId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    discordId: z.string(),
+  })
+);
 
 export function postV1ServerAdminRemoveRequestToJSON(
   postV1ServerAdminRemoveRequest: PostV1ServerAdminRemoveRequest,
@@ -47,10 +49,12 @@ export function postV1ServerAdminRemoveRequestToJSON(
 export const PostV1ServerAdminRemoveResponse$inboundSchema: z.ZodMiniType<
   PostV1ServerAdminRemoveResponse,
   unknown
-> = z.object({
-  success: types.optional(types.boolean()),
-  message: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: types.optional(types.boolean()),
+    message: types.optional(types.string()),
+  })
+);
 
 export function postV1ServerAdminRemoveResponseFromJSON(
   jsonString: string,

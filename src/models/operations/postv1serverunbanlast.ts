@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -32,10 +32,12 @@ export type PostV1ServerUnbanLastRequest$Outbound = {
 export const PostV1ServerUnbanLastRequest$outboundSchema: z.ZodMiniType<
   PostV1ServerUnbanLastRequest$Outbound,
   PostV1ServerUnbanLastRequest
-> = z.object({
-  count: z._default(z.int(), 1),
-  minutes: z.optional(z.int()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z._default(z.int(), 1),
+    minutes: z.optional(z.int()),
+  })
+);
 
 export function postV1ServerUnbanLastRequestToJSON(
   postV1ServerUnbanLastRequest: PostV1ServerUnbanLastRequest,
@@ -51,11 +53,13 @@ export function postV1ServerUnbanLastRequestToJSON(
 export const PostV1ServerUnbanLastResponse$inboundSchema: z.ZodMiniType<
   PostV1ServerUnbanLastResponse,
   unknown
-> = z.object({
-  success: types.optional(types.boolean()),
-  count: types.optional(types.number()),
-  message: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: types.optional(types.boolean()),
+    count: types.optional(types.number()),
+    message: types.optional(types.string()),
+  })
+);
 
 export function postV1ServerUnbanLastResponseFromJSON(
   jsonString: string,

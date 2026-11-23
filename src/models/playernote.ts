@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import * as types from "../types/primitives.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -20,17 +20,19 @@ export type PlayerNote = {
 };
 
 /** @internal */
-export const PlayerNote$inboundSchema: z.ZodMiniType<PlayerNote, unknown> = z
-  .object({
-    id: types.optional(types.string()),
-    authorId: types.optional(types.string()),
-    authorName: types.optional(types.string()),
-    authorImage: types.optional(types.string()),
-    isPinned: types.optional(types.boolean()),
-    content: types.optional(types.string()),
-    createdAt: types.optional(types.date()),
-    updatedAt: types.optional(types.date()),
-  });
+export const PlayerNote$inboundSchema: z.ZodMiniType<PlayerNote, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: types.optional(types.string()),
+      authorId: types.optional(types.string()),
+      authorName: types.optional(types.string()),
+      authorImage: types.optional(types.string()),
+      isPinned: types.optional(types.boolean()),
+      content: types.optional(types.string()),
+      createdAt: types.optional(types.date()),
+      updatedAt: types.optional(types.date()),
+    })
+  );
 
 export function playerNoteFromJSON(
   jsonString: string,

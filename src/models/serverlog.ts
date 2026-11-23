@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import * as types from "../types/primitives.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -29,7 +29,7 @@ export type ServerLog = {
 export const ServerLogDetails$inboundSchema: z.ZodMiniType<
   ServerLogDetails,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function serverLogDetailsFromJSON(
   jsonString: string,
@@ -42,15 +42,17 @@ export function serverLogDetailsFromJSON(
 }
 
 /** @internal */
-export const ServerLog$inboundSchema: z.ZodMiniType<ServerLog, unknown> = z
-  .object({
-    id: types.optional(types.string()),
-    type: types.optional(types.string()),
-    details: types.optional(z.lazy(() => ServerLogDetails$inboundSchema)),
-    timestamp: types.optional(types.date()),
-    executor: types.optional(types.string()),
-    target: types.optional(types.string()),
-  });
+export const ServerLog$inboundSchema: z.ZodMiniType<ServerLog, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: types.optional(types.string()),
+      type: types.optional(types.string()),
+      details: types.optional(z.lazy(() => ServerLogDetails$inboundSchema)),
+      timestamp: types.optional(types.date()),
+      executor: types.optional(types.string()),
+      target: types.optional(types.string()),
+    })
+  );
 
 export function serverLogFromJSON(
   jsonString: string,

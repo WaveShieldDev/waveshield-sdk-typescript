@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,9 +45,11 @@ export const GetV1PlayerIdentifierDiscordLookupRequest$outboundSchema:
   z.ZodMiniType<
     GetV1PlayerIdentifierDiscordLookupRequest$Outbound,
     GetV1PlayerIdentifierDiscordLookupRequest
-  > = z.object({
-    identifier: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      identifier: z.string(),
+    })
+  );
 
 export function getV1PlayerIdentifierDiscordLookupRequestToJSON(
   getV1PlayerIdentifierDiscordLookupRequest:
@@ -61,11 +63,14 @@ export function getV1PlayerIdentifierDiscordLookupRequestToJSON(
 }
 
 /** @internal */
-export const Role$inboundSchema: z.ZodMiniType<Role, unknown> = z.object({
-  roleId: types.optional(types.string()),
-  roleName: types.optional(types.string()),
-  roleColor: types.optional(types.string()),
-});
+export const Role$inboundSchema: z.ZodMiniType<Role, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      roleId: types.optional(types.string()),
+      roleName: types.optional(types.string()),
+      roleColor: types.optional(types.string()),
+    })
+  );
 
 export function roleFromJSON(
   jsonString: string,
@@ -79,12 +84,15 @@ export function roleFromJSON(
 
 /** @internal */
 export const GetV1PlayerIdentifierDiscordLookupServer$inboundSchema:
-  z.ZodMiniType<GetV1PlayerIdentifierDiscordLookupServer, unknown> = z.object({
-    serverName: types.optional(types.string()),
-    serverGuildId: types.optional(types.string()),
-    serverIconUrl: types.optional(types.string()),
-    roles: types.optional(z.array(z.lazy(() => Role$inboundSchema))),
-  });
+  z.ZodMiniType<GetV1PlayerIdentifierDiscordLookupServer, unknown> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        serverName: types.optional(types.string()),
+        serverGuildId: types.optional(types.string()),
+        serverIconUrl: types.optional(types.string()),
+        roles: types.optional(z.array(z.lazy(() => Role$inboundSchema))),
+      })
+    );
 
 export function getV1PlayerIdentifierDiscordLookupServerFromJSON(
   jsonString: string,
@@ -104,16 +112,17 @@ export function getV1PlayerIdentifierDiscordLookupServerFromJSON(
 
 /** @internal */
 export const GetV1PlayerIdentifierDiscordLookupResponse$inboundSchema:
-  z.ZodMiniType<GetV1PlayerIdentifierDiscordLookupResponse, unknown> = z.object(
-    {
-      discordId: types.optional(types.string()),
-      servers: types.optional(z.array(z.lazy(() =>
-        GetV1PlayerIdentifierDiscordLookupServer$inboundSchema
-      ))),
-      totalServers: types.optional(types.number()),
-      isInCheatServer: types.optional(types.boolean()),
-    },
-  );
+  z.ZodMiniType<GetV1PlayerIdentifierDiscordLookupResponse, unknown> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        discordId: types.optional(types.string()),
+        servers: types.optional(z.array(z.lazy(() =>
+          GetV1PlayerIdentifierDiscordLookupServer$inboundSchema
+        ))),
+        totalServers: types.optional(types.number()),
+        isInCheatServer: types.optional(types.boolean()),
+      })
+    );
 
 export function getV1PlayerIdentifierDiscordLookupResponseFromJSON(
   jsonString: string,

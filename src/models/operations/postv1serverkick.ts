@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,11 +33,13 @@ export type PostV1ServerKickRequest$Outbound = {
 export const PostV1ServerKickRequest$outboundSchema: z.ZodMiniType<
   PostV1ServerKickRequest$Outbound,
   PostV1ServerKickRequest
-> = z.object({
-  playerId: z.string(),
-  reason: z.optional(z.string()),
-  by: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    playerId: z.string(),
+    reason: z.optional(z.string()),
+    by: z.optional(z.string()),
+  })
+);
 
 export function postV1ServerKickRequestToJSON(
   postV1ServerKickRequest: PostV1ServerKickRequest,
@@ -51,10 +53,12 @@ export function postV1ServerKickRequestToJSON(
 export const PostV1ServerKickResponse$inboundSchema: z.ZodMiniType<
   PostV1ServerKickResponse,
   unknown
-> = z.object({
-  success: types.optional(types.boolean()),
-  message: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: types.optional(types.boolean()),
+    message: types.optional(types.string()),
+  })
+);
 
 export function postV1ServerKickResponseFromJSON(
   jsonString: string,

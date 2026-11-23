@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,9 +52,11 @@ export type GetV1BansStatsRequest$Outbound = {
 export const GetV1BansStatsRequest$outboundSchema: z.ZodMiniType<
   GetV1BansStatsRequest$Outbound,
   GetV1BansStatsRequest
-> = z.object({
-  reason: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: z.optional(z.string()),
+  })
+);
 
 export function getV1BansStatsRequestToJSON(
   getV1BansStatsRequest: GetV1BansStatsRequest,
@@ -65,9 +67,12 @@ export function getV1BansStatsRequestToJSON(
 }
 
 /** @internal */
-export const Filter$inboundSchema: z.ZodMiniType<Filter, unknown> = z.object({
-  reason: z.optional(z.nullable(types.string())),
-});
+export const Filter$inboundSchema: z.ZodMiniType<Filter, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reason: z.optional(z.nullable(types.string())),
+    })
+  );
 
 export function filterFromJSON(
   jsonString: string,
@@ -80,12 +85,15 @@ export function filterFromJSON(
 }
 
 /** @internal */
-export const Active$inboundSchema: z.ZodMiniType<Active, unknown> = z.object({
-  last24h: types.optional(types.number()),
-  last7d: types.optional(types.number()),
-  last30d: types.optional(types.number()),
-  total: types.optional(types.number()),
-});
+export const Active$inboundSchema: z.ZodMiniType<Active, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      last24h: types.optional(types.number()),
+      last7d: types.optional(types.number()),
+      last30d: types.optional(types.number()),
+      total: types.optional(types.number()),
+    })
+  );
 
 export function activeFromJSON(
   jsonString: string,
@@ -98,12 +106,15 @@ export function activeFromJSON(
 }
 
 /** @internal */
-export const Issued$inboundSchema: z.ZodMiniType<Issued, unknown> = z.object({
-  last24h: types.optional(types.number()),
-  last7d: types.optional(types.number()),
-  last30d: types.optional(types.number()),
-  total: types.optional(types.number()),
-});
+export const Issued$inboundSchema: z.ZodMiniType<Issued, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      last24h: types.optional(types.number()),
+      last7d: types.optional(types.number()),
+      last30d: types.optional(types.number()),
+      total: types.optional(types.number()),
+    })
+  );
 
 export function issuedFromJSON(
   jsonString: string,
@@ -119,10 +130,12 @@ export function issuedFromJSON(
 export const GetV1BansStatsStats$inboundSchema: z.ZodMiniType<
   GetV1BansStatsStats,
   unknown
-> = z.object({
-  active: types.optional(z.lazy(() => Active$inboundSchema)),
-  issued: types.optional(z.lazy(() => Issued$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    active: types.optional(z.lazy(() => Active$inboundSchema)),
+    issued: types.optional(z.lazy(() => Issued$inboundSchema)),
+  })
+);
 
 export function getV1BansStatsStatsFromJSON(
   jsonString: string,
@@ -138,10 +151,12 @@ export function getV1BansStatsStatsFromJSON(
 export const GetV1BansStatsResponse$inboundSchema: z.ZodMiniType<
   GetV1BansStatsResponse,
   unknown
-> = z.object({
-  filter: types.optional(z.lazy(() => Filter$inboundSchema)),
-  stats: types.optional(z.lazy(() => GetV1BansStatsStats$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filter: types.optional(z.lazy(() => Filter$inboundSchema)),
+    stats: types.optional(z.lazy(() => GetV1BansStatsStats$inboundSchema)),
+  })
+);
 
 export function getV1BansStatsResponseFromJSON(
   jsonString: string,

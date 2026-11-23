@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,13 +37,15 @@ export type PostV1ServerBanRequest$Outbound = {
 export const PostV1ServerBanRequest$outboundSchema: z.ZodMiniType<
   PostV1ServerBanRequest$Outbound,
   PostV1ServerBanRequest
-> = z.object({
-  playerId: z.string(),
-  reason: z.string(),
-  duration: z.optional(z.int()),
-  evidence: z.optional(z.string()),
-  by: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    playerId: z.string(),
+    reason: z.string(),
+    duration: z.optional(z.int()),
+    evidence: z.optional(z.string()),
+    by: z.optional(z.string()),
+  })
+);
 
 export function postV1ServerBanRequestToJSON(
   postV1ServerBanRequest: PostV1ServerBanRequest,
@@ -57,10 +59,12 @@ export function postV1ServerBanRequestToJSON(
 export const PostV1ServerBanResponse$inboundSchema: z.ZodMiniType<
   PostV1ServerBanResponse,
   unknown
-> = z.object({
-  success: types.optional(types.boolean()),
-  message: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: types.optional(types.boolean()),
+    message: types.optional(types.string()),
+  })
+);
 
 export function postV1ServerBanResponseFromJSON(
   jsonString: string,

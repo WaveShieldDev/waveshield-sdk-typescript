@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -36,12 +36,14 @@ export type GetV1ServerBansHistoryRequest$Outbound = {
 export const GetV1ServerBansHistoryRequest$outboundSchema: z.ZodMiniType<
   GetV1ServerBansHistoryRequest$Outbound,
   GetV1ServerBansHistoryRequest
-> = z.object({
-  limit: z.optional(z.int()),
-  page: z.optional(z.int()),
-  reason: z.optional(z.string()),
-  playerName: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.optional(z.int()),
+    page: z.optional(z.int()),
+    reason: z.optional(z.string()),
+    playerName: z.optional(z.string()),
+  })
+);
 
 export function getV1ServerBansHistoryRequestToJSON(
   getV1ServerBansHistoryRequest: GetV1ServerBansHistoryRequest,
@@ -57,10 +59,12 @@ export function getV1ServerBansHistoryRequestToJSON(
 export const GetV1ServerBansHistoryResponse$inboundSchema: z.ZodMiniType<
   GetV1ServerBansHistoryResponse,
   unknown
-> = z.object({
-  data: types.optional(z.array(models.ServerBanHistory$inboundSchema)),
-  pagination: types.optional(models.Pagination$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: types.optional(z.array(models.ServerBanHistory$inboundSchema)),
+    pagination: types.optional(models.Pagination$inboundSchema),
+  })
+);
 
 export function getV1ServerBansHistoryResponseFromJSON(
   jsonString: string,

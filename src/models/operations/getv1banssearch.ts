@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -36,12 +36,14 @@ export type GetV1BansSearchRequest$Outbound = {
 export const GetV1BansSearchRequest$outboundSchema: z.ZodMiniType<
   GetV1BansSearchRequest$Outbound,
   GetV1BansSearchRequest
-> = z.object({
-  limit: z.optional(z.int()),
-  page: z.optional(z.int()),
-  reason: z.optional(z.string()),
-  playerName: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.optional(z.int()),
+    page: z.optional(z.int()),
+    reason: z.optional(z.string()),
+    playerName: z.optional(z.string()),
+  })
+);
 
 export function getV1BansSearchRequestToJSON(
   getV1BansSearchRequest: GetV1BansSearchRequest,
@@ -55,10 +57,12 @@ export function getV1BansSearchRequestToJSON(
 export const GetV1BansSearchResponse$inboundSchema: z.ZodMiniType<
   GetV1BansSearchResponse,
   unknown
-> = z.object({
-  data: types.optional(z.array(models.BanPublic$inboundSchema)),
-  pagination: types.optional(models.Pagination$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: types.optional(z.array(models.BanPublic$inboundSchema)),
+    pagination: types.optional(models.Pagination$inboundSchema),
+  })
+);
 
 export function getV1BansSearchResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -55,9 +55,11 @@ export type GetV1ServerStatsRequest$Outbound = {
 export const GetV1ServerStatsRequest$outboundSchema: z.ZodMiniType<
   GetV1ServerStatsRequest$Outbound,
   GetV1ServerStatsRequest
-> = z.object({
-  window: z._default(z.string(), "24h"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    window: z._default(z.string(), "24h"),
+  })
+);
 
 export function getV1ServerStatsRequestToJSON(
   getV1ServerStatsRequest: GetV1ServerStatsRequest,
@@ -68,10 +70,13 @@ export function getV1ServerStatsRequestToJSON(
 }
 
 /** @internal */
-export const Current$inboundSchema: z.ZodMiniType<Current, unknown> = z.object({
-  players: types.optional(types.number()),
-  online: types.optional(types.boolean()),
-});
+export const Current$inboundSchema: z.ZodMiniType<Current, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      players: types.optional(types.number()),
+      online: types.optional(types.boolean()),
+    })
+  );
 
 export function currentFromJSON(
   jsonString: string,
@@ -84,10 +89,12 @@ export function currentFromJSON(
 }
 
 /** @internal */
-export const Averages$inboundSchema: z.ZodMiniType<Averages, unknown> = z
-  .object({
-    players: types.optional(types.number()),
-  });
+export const Averages$inboundSchema: z.ZodMiniType<Averages, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      players: types.optional(types.number()),
+    })
+  );
 
 export function averagesFromJSON(
   jsonString: string,
@@ -100,13 +107,15 @@ export function averagesFromJSON(
 }
 
 /** @internal */
-export const Activity$inboundSchema: z.ZodMiniType<Activity, unknown> = z
-  .object({
-    bansIssued: types.optional(types.number()),
-    newBans: types.optional(types.number()),
-    newPlayers: types.optional(types.number()),
-    playerJoins: types.optional(types.number()),
-  });
+export const Activity$inboundSchema: z.ZodMiniType<Activity, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      bansIssued: types.optional(types.number()),
+      newBans: types.optional(types.number()),
+      newPlayers: types.optional(types.number()),
+      playerJoins: types.optional(types.number()),
+    })
+  );
 
 export function activityFromJSON(
   jsonString: string,
@@ -119,11 +128,14 @@ export function activityFromJSON(
 }
 
 /** @internal */
-export const History$inboundSchema: z.ZodMiniType<History, unknown> = z.object({
-  timestamp: types.optional(types.string()),
-  players: types.optional(types.number()),
-  bans: types.optional(types.number()),
-});
+export const History$inboundSchema: z.ZodMiniType<History, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      timestamp: types.optional(types.string()),
+      players: types.optional(types.number()),
+      bans: types.optional(types.number()),
+    })
+  );
 
 export function historyFromJSON(
   jsonString: string,
@@ -139,14 +151,16 @@ export function historyFromJSON(
 export const GetV1ServerStatsResponse$inboundSchema: z.ZodMiniType<
   GetV1ServerStatsResponse,
   unknown
-> = z.object({
-  window: types.optional(types.string()),
-  since: types.optional(types.string()),
-  current: types.optional(z.lazy(() => Current$inboundSchema)),
-  averages: types.optional(z.lazy(() => Averages$inboundSchema)),
-  activity: types.optional(z.lazy(() => Activity$inboundSchema)),
-  history: types.optional(z.array(z.lazy(() => History$inboundSchema))),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    window: types.optional(types.string()),
+    since: types.optional(types.string()),
+    current: types.optional(z.lazy(() => Current$inboundSchema)),
+    averages: types.optional(z.lazy(() => Averages$inboundSchema)),
+    activity: types.optional(z.lazy(() => Activity$inboundSchema)),
+    history: types.optional(z.array(z.lazy(() => History$inboundSchema))),
+  })
+);
 
 export function getV1ServerStatsResponseFromJSON(
   jsonString: string,

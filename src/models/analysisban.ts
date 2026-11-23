@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import * as types from "../types/primitives.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -53,7 +53,7 @@ export type AnalysisBan = {
 export const AnalysisBanDetails$inboundSchema: z.ZodMiniType<
   AnalysisBanDetails,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function analysisBanDetailsFromJSON(
   jsonString: string,
@@ -69,11 +69,13 @@ export function analysisBanDetailsFromJSON(
 export const AnalysisBanServer$inboundSchema: z.ZodMiniType<
   AnalysisBanServer,
   unknown
-> = z.object({
-  id: types.optional(types.string()),
-  name: types.optional(types.string()),
-  isCurrentServer: types.optional(types.boolean()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: types.optional(types.string()),
+    name: types.optional(types.string()),
+    isCurrentServer: types.optional(types.boolean()),
+  })
+);
 
 export function analysisBanServerFromJSON(
   jsonString: string,
@@ -86,11 +88,13 @@ export function analysisBanServerFromJSON(
 }
 
 /** @internal */
-export const Identifier$inboundSchema: z.ZodMiniType<Identifier, unknown> = z
-  .object({
-    type: types.optional(types.string()),
-    value: types.optional(types.string()),
-  });
+export const Identifier$inboundSchema: z.ZodMiniType<Identifier, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: types.optional(types.string()),
+      value: types.optional(types.string()),
+    })
+  );
 
 export function identifierFromJSON(
   jsonString: string,
@@ -106,10 +110,12 @@ export function identifierFromJSON(
 export const MatchingIdentifier$inboundSchema: z.ZodMiniType<
   MatchingIdentifier,
   unknown
-> = z.object({
-  type: types.optional(types.string()),
-  value: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: types.optional(types.string()),
+    value: types.optional(types.string()),
+  })
+);
 
 export function matchingIdentifierFromJSON(
   jsonString: string,
@@ -125,11 +131,13 @@ export function matchingIdentifierFromJSON(
 export const AnalysisBanPlayer$inboundSchema: z.ZodMiniType<
   AnalysisBanPlayer,
   unknown
-> = z.object({
-  id: types.optional(types.string()),
-  playerName: types.optional(types.string()),
-  playTime: types.optional(types.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: types.optional(types.string()),
+    playerName: types.optional(types.string()),
+    playTime: types.optional(types.number()),
+  })
+);
 
 export function analysisBanPlayerFromJSON(
   jsonString: string,
@@ -142,27 +150,29 @@ export function analysisBanPlayerFromJSON(
 }
 
 /** @internal */
-export const AnalysisBan$inboundSchema: z.ZodMiniType<AnalysisBan, unknown> = z
-  .object({
-    id: types.optional(types.string()),
-    banId: types.optional(types.string()),
-    reason: types.optional(types.string()),
-    details: types.optional(z.lazy(() => AnalysisBanDetails$inboundSchema)),
-    evidenceUrl: types.optional(types.string()),
-    bannedAt: types.optional(types.date()),
-    expiresAt: types.optional(types.date()),
-    bannedBy: types.optional(types.string()),
-    server: types.optional(z.lazy(() => AnalysisBanServer$inboundSchema)),
-    identifiers: types.optional(
-      z.array(z.lazy(() => Identifier$inboundSchema)),
-    ),
-    isDirectBan: types.optional(types.boolean()),
-    isAltAccountBan: types.optional(types.boolean()),
-    matchingIdentifiers: types.optional(
-      z.array(z.lazy(() => MatchingIdentifier$inboundSchema)),
-    ),
-    player: types.optional(z.lazy(() => AnalysisBanPlayer$inboundSchema)),
-  });
+export const AnalysisBan$inboundSchema: z.ZodMiniType<AnalysisBan, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: types.optional(types.string()),
+      banId: types.optional(types.string()),
+      reason: types.optional(types.string()),
+      details: types.optional(z.lazy(() => AnalysisBanDetails$inboundSchema)),
+      evidenceUrl: types.optional(types.string()),
+      bannedAt: types.optional(types.date()),
+      expiresAt: types.optional(types.date()),
+      bannedBy: types.optional(types.string()),
+      server: types.optional(z.lazy(() => AnalysisBanServer$inboundSchema)),
+      identifiers: types.optional(
+        z.array(z.lazy(() => Identifier$inboundSchema)),
+      ),
+      isDirectBan: types.optional(types.boolean()),
+      isAltAccountBan: types.optional(types.boolean()),
+      matchingIdentifiers: types.optional(
+        z.array(z.lazy(() => MatchingIdentifier$inboundSchema)),
+      ),
+      player: types.optional(z.lazy(() => AnalysisBanPlayer$inboundSchema)),
+    })
+  );
 
 export function analysisBanFromJSON(
   jsonString: string,

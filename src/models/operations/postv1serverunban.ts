@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,9 +29,11 @@ export type PostV1ServerUnbanRequest$Outbound = {
 export const PostV1ServerUnbanRequest$outboundSchema: z.ZodMiniType<
   PostV1ServerUnbanRequest$Outbound,
   PostV1ServerUnbanRequest
-> = z.object({
-  banId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    banId: z.string(),
+  })
+);
 
 export function postV1ServerUnbanRequestToJSON(
   postV1ServerUnbanRequest: PostV1ServerUnbanRequest,
@@ -45,10 +47,12 @@ export function postV1ServerUnbanRequestToJSON(
 export const PostV1ServerUnbanResponse$inboundSchema: z.ZodMiniType<
   PostV1ServerUnbanResponse,
   unknown
-> = z.object({
-  success: types.optional(types.boolean()),
-  message: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: types.optional(types.boolean()),
+    message: types.optional(types.string()),
+  })
+);
 
 export function postV1ServerUnbanResponseFromJSON(
   jsonString: string,

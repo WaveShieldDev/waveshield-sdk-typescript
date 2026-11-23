@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -35,9 +35,11 @@ export type GetV1BansRecentRequest$Outbound = {
 export const GetV1BansRecentRequest$outboundSchema: z.ZodMiniType<
   GetV1BansRecentRequest$Outbound,
   GetV1BansRecentRequest
-> = z.object({
-  limit: z._default(z.int(), 10),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z._default(z.int(), 10),
+  })
+);
 
 export function getV1BansRecentRequestToJSON(
   getV1BansRecentRequest: GetV1BansRecentRequest,
@@ -51,10 +53,12 @@ export function getV1BansRecentRequestToJSON(
 export const GetV1BansRecentMeta$inboundSchema: z.ZodMiniType<
   GetV1BansRecentMeta,
   unknown
-> = z.object({
-  count: types.optional(types.number()),
-  limit: types.optional(types.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: types.optional(types.number()),
+    limit: types.optional(types.number()),
+  })
+);
 
 export function getV1BansRecentMetaFromJSON(
   jsonString: string,
@@ -70,10 +74,12 @@ export function getV1BansRecentMetaFromJSON(
 export const GetV1BansRecentResponse$inboundSchema: z.ZodMiniType<
   GetV1BansRecentResponse,
   unknown
-> = z.object({
-  data: types.optional(z.array(models.BanPublic$inboundSchema)),
-  meta: types.optional(z.lazy(() => GetV1BansRecentMeta$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: types.optional(z.array(models.BanPublic$inboundSchema)),
+    meta: types.optional(z.lazy(() => GetV1BansRecentMeta$inboundSchema)),
+  })
+);
 
 export function getV1BansRecentResponseFromJSON(
   jsonString: string,

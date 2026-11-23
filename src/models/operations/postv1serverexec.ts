@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -31,10 +31,12 @@ export type PostV1ServerExecRequest$Outbound = {
 export const PostV1ServerExecRequest$outboundSchema: z.ZodMiniType<
   PostV1ServerExecRequest$Outbound,
   PostV1ServerExecRequest
-> = z.object({
-  command: z.string(),
-  by: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    command: z.string(),
+    by: z.optional(z.string()),
+  })
+);
 
 export function postV1ServerExecRequestToJSON(
   postV1ServerExecRequest: PostV1ServerExecRequest,
@@ -48,10 +50,12 @@ export function postV1ServerExecRequestToJSON(
 export const PostV1ServerExecResponse$inboundSchema: z.ZodMiniType<
   PostV1ServerExecResponse,
   unknown
-> = z.object({
-  success: types.optional(types.boolean()),
-  message: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: types.optional(types.boolean()),
+    message: types.optional(types.string()),
+  })
+);
 
 export function postV1ServerExecResponseFromJSON(
   jsonString: string,
