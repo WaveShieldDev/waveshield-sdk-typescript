@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import * as openEnums from "../types/enums.js";
 import { OpenEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
@@ -99,17 +99,19 @@ export type PlayerAnalysis = {
 export const PlayerAnalysisPlayer$inboundSchema: z.ZodMiniType<
   PlayerAnalysisPlayer,
   unknown
-> = z.object({
-  id: types.optional(types.string()),
-  playerName: types.optional(types.string()),
-  playerLicense: types.optional(types.string()),
-  oldNames: types.optional(z.array(types.string())),
-  identifiers: types.optional(z.array(types.string())),
-  oldIdentifiers: types.optional(z.array(types.string())),
-  firstJoin: types.optional(types.date()),
-  lastJoin: types.optional(types.date()),
-  playTime: types.optional(types.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: types.optional(types.string()),
+    playerName: types.optional(types.string()),
+    playerLicense: types.optional(types.string()),
+    oldNames: types.optional(z.array(types.string())),
+    identifiers: types.optional(z.array(types.string())),
+    oldIdentifiers: types.optional(z.array(types.string())),
+    firstJoin: types.optional(types.date()),
+    lastJoin: types.optional(types.date()),
+    playTime: types.optional(types.number()),
+  })
+);
 
 export function playerAnalysisPlayerFromJSON(
   jsonString: string,
@@ -125,11 +127,13 @@ export function playerAnalysisPlayerFromJSON(
 export const AltAccountServer$inboundSchema: z.ZodMiniType<
   AltAccountServer,
   unknown
-> = z.object({
-  id: types.optional(types.string()),
-  name: types.optional(types.string()),
-  isCurrentServer: types.optional(types.boolean()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: types.optional(types.string()),
+    name: types.optional(types.string()),
+    isCurrentServer: types.optional(types.boolean()),
+  })
+);
 
 export function altAccountServerFromJSON(
   jsonString: string,
@@ -142,18 +146,20 @@ export function altAccountServerFromJSON(
 }
 
 /** @internal */
-export const AltAccount$inboundSchema: z.ZodMiniType<AltAccount, unknown> = z
-  .object({
-    id: types.optional(types.string()),
-    playerName: types.optional(types.string()),
-    playerLicense: types.optional(types.string()),
-    firstJoin: types.optional(types.date()),
-    lastJoin: types.optional(types.date()),
-    playTime: types.optional(types.number()),
-    server: types.optional(z.lazy(() => AltAccountServer$inboundSchema)),
-    matchingIdentifiers: types.optional(z.array(types.string())),
-    identifiersCount: types.optional(types.number()),
-  });
+export const AltAccount$inboundSchema: z.ZodMiniType<AltAccount, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: types.optional(types.string()),
+      playerName: types.optional(types.string()),
+      playerLicense: types.optional(types.string()),
+      firstJoin: types.optional(types.date()),
+      lastJoin: types.optional(types.date()),
+      playTime: types.optional(types.number()),
+      server: types.optional(z.lazy(() => AltAccountServer$inboundSchema)),
+      matchingIdentifiers: types.optional(z.array(types.string())),
+      identifiersCount: types.optional(types.number()),
+    })
+  );
 
 export function altAccountFromJSON(
   jsonString: string,
@@ -166,11 +172,14 @@ export function altAccountFromJSON(
 }
 
 /** @internal */
-export const Role$inboundSchema: z.ZodMiniType<Role, unknown> = z.object({
-  roleId: types.optional(types.string()),
-  roleName: types.optional(types.string()),
-  roleColor: types.optional(types.string()),
-});
+export const Role$inboundSchema: z.ZodMiniType<Role, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      roleId: types.optional(types.string()),
+      roleName: types.optional(types.string()),
+      roleColor: types.optional(types.string()),
+    })
+  );
 
 export function roleFromJSON(
   jsonString: string,
@@ -186,12 +195,14 @@ export function roleFromJSON(
 export const DiscordCheatServersLookupServer$inboundSchema: z.ZodMiniType<
   DiscordCheatServersLookupServer,
   unknown
-> = z.object({
-  serverIconUrl: types.optional(types.string()),
-  serverName: types.optional(types.string()),
-  serverGuildId: types.optional(types.string()),
-  roles: types.optional(z.array(z.lazy(() => Role$inboundSchema))),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverIconUrl: types.optional(types.string()),
+    serverName: types.optional(types.string()),
+    serverGuildId: types.optional(types.string()),
+    roles: types.optional(z.array(z.lazy(() => Role$inboundSchema))),
+  })
+);
 
 export function discordCheatServersLookupServerFromJSON(
   jsonString: string,
@@ -207,13 +218,15 @@ export function discordCheatServersLookupServerFromJSON(
 export const DiscordCheatServersLookup$inboundSchema: z.ZodMiniType<
   DiscordCheatServersLookup,
   unknown
-> = z.object({
-  isInCheatServer: types.optional(types.boolean()),
-  totalServers: types.optional(types.number()),
-  servers: types.optional(
-    z.array(z.lazy(() => DiscordCheatServersLookupServer$inboundSchema)),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    isInCheatServer: types.optional(types.boolean()),
+    totalServers: types.optional(types.number()),
+    servers: types.optional(
+      z.array(z.lazy(() => DiscordCheatServersLookupServer$inboundSchema)),
+    ),
+  })
+);
 
 export function discordCheatServersLookupFromJSON(
   jsonString: string,
@@ -229,7 +242,7 @@ export function discordCheatServersLookupFromJSON(
 export const PlayerAnalysisDetails$inboundSchema: z.ZodMiniType<
   PlayerAnalysisDetails,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function playerAnalysisDetailsFromJSON(
   jsonString: string,
@@ -242,14 +255,18 @@ export function playerAnalysisDetailsFromJSON(
 }
 
 /** @internal */
-export const BansHistory$inboundSchema: z.ZodMiniType<BansHistory, unknown> = z
-  .object({
-    server: types.optional(types.string()),
-    reason: types.optional(types.string()),
-    details: types.optional(z.lazy(() => PlayerAnalysisDetails$inboundSchema)),
-    evidenceUrl: types.optional(types.string()),
-    bannedAt: types.optional(types.date()),
-  });
+export const BansHistory$inboundSchema: z.ZodMiniType<BansHistory, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      server: types.optional(types.string()),
+      reason: types.optional(types.string()),
+      details: types.optional(
+        z.lazy(() => PlayerAnalysisDetails$inboundSchema),
+      ),
+      evidenceUrl: types.optional(types.string()),
+      bannedAt: types.optional(types.date()),
+    })
+  );
 
 export function bansHistoryFromJSON(
   jsonString: string,
@@ -263,15 +280,17 @@ export function bansHistoryFromJSON(
 
 /** @internal */
 export const RiskLevel$inboundSchema: z.ZodMiniType<RiskLevel, unknown> =
-  openEnums.inboundSchema(RiskLevel);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(RiskLevel));
 
 /** @internal */
-export const ThreatScore$inboundSchema: z.ZodMiniType<ThreatScore, unknown> = z
-  .object({
-    score: types.optional(types.number()),
-    riskLevel: types.optional(RiskLevel$inboundSchema),
-    warnings: types.optional(z.array(types.string())),
-  });
+export const ThreatScore$inboundSchema: z.ZodMiniType<ThreatScore, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      score: types.optional(types.number()),
+      riskLevel: types.optional(RiskLevel$inboundSchema),
+      warnings: types.optional(z.array(types.string())),
+    })
+  );
 
 export function threatScoreFromJSON(
   jsonString: string,
@@ -287,18 +306,24 @@ export function threatScoreFromJSON(
 export const PlayerAnalysis$inboundSchema: z.ZodMiniType<
   PlayerAnalysis,
   unknown
-> = z.object({
-  player: types.optional(z.lazy(() => PlayerAnalysisPlayer$inboundSchema)),
-  altAccounts: types.optional(z.array(z.lazy(() => AltAccount$inboundSchema))),
-  discordCheatServersLookup: types.optional(
-    z.lazy(() => DiscordCheatServersLookup$inboundSchema),
-  ),
-  playerBans: types.optional(z.array(AnalysisBan$inboundSchema)),
-  sameServerAltBans: types.optional(z.array(AnalysisBan$inboundSchema)),
-  crossServerBans: types.optional(z.array(AnalysisBan$inboundSchema)),
-  bansHistory: types.optional(z.array(z.lazy(() => BansHistory$inboundSchema))),
-  threatScore: types.optional(z.lazy(() => ThreatScore$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    player: types.optional(z.lazy(() => PlayerAnalysisPlayer$inboundSchema)),
+    altAccounts: types.optional(
+      z.array(z.lazy(() => AltAccount$inboundSchema)),
+    ),
+    discordCheatServersLookup: types.optional(
+      z.lazy(() => DiscordCheatServersLookup$inboundSchema),
+    ),
+    playerBans: types.optional(z.array(AnalysisBan$inboundSchema)),
+    sameServerAltBans: types.optional(z.array(AnalysisBan$inboundSchema)),
+    crossServerBans: types.optional(z.array(AnalysisBan$inboundSchema)),
+    bansHistory: types.optional(
+      z.array(z.lazy(() => BansHistory$inboundSchema)),
+    ),
+    threatScore: types.optional(z.lazy(() => ThreatScore$inboundSchema)),
+  })
+);
 
 export function playerAnalysisFromJSON(
   jsonString: string,

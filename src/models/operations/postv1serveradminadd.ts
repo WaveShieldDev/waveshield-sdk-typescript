@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
@@ -42,8 +42,8 @@ export type PostV1ServerAdminAddResponse = {
 };
 
 /** @internal */
-export const Permission$outboundSchema: z.ZodMiniEnum<typeof Permission> = z
-  .enum(Permission);
+export const Permission$outboundSchema: z.ZodMiniEnum<typeof Permission> =
+  /* @__PURE__ */ lazySchema$(() => z.enum(Permission));
 
 /** @internal */
 export type PostV1ServerAdminAddRequest$Outbound = {
@@ -55,10 +55,12 @@ export type PostV1ServerAdminAddRequest$Outbound = {
 export const PostV1ServerAdminAddRequest$outboundSchema: z.ZodMiniType<
   PostV1ServerAdminAddRequest$Outbound,
   PostV1ServerAdminAddRequest
-> = z.object({
-  discordId: z.string(),
-  permissions: z.array(Permission$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    discordId: z.string(),
+    permissions: z.array(Permission$outboundSchema),
+  })
+);
 
 export function postV1ServerAdminAddRequestToJSON(
   postV1ServerAdminAddRequest: PostV1ServerAdminAddRequest,
@@ -71,9 +73,8 @@ export function postV1ServerAdminAddRequestToJSON(
 }
 
 /** @internal */
-export const Member$inboundSchema: z.ZodMiniType<Member, unknown> = z.object(
-  {},
-);
+export const Member$inboundSchema: z.ZodMiniType<Member, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function memberFromJSON(
   jsonString: string,
@@ -89,10 +90,12 @@ export function memberFromJSON(
 export const PostV1ServerAdminAddResponse$inboundSchema: z.ZodMiniType<
   PostV1ServerAdminAddResponse,
   unknown
-> = z.object({
-  success: types.optional(types.boolean()),
-  member: types.optional(z.lazy(() => Member$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: types.optional(types.boolean()),
+    member: types.optional(z.lazy(() => Member$inboundSchema)),
+  })
+);
 
 export function postV1ServerAdminAddResponseFromJSON(
   jsonString: string,

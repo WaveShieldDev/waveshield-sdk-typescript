@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import * as types from "../types/primitives.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -36,7 +36,7 @@ export type BanPublic = {
 export const BanPublicDetails$inboundSchema: z.ZodMiniType<
   BanPublicDetails,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function banPublicDetailsFromJSON(
   jsonString: string,
@@ -49,22 +49,24 @@ export function banPublicDetailsFromJSON(
 }
 
 /** @internal */
-export const BanPublic$inboundSchema: z.ZodMiniType<BanPublic, unknown> = z
-  .object({
-    id: types.optional(types.string()),
-    player: types.optional(types.string()),
-    server: types.optional(types.string()),
-    reason: types.optional(types.string()),
-    details: types.optional(z.lazy(() => BanPublicDetails$inboundSchema)),
-    evidence: types.optional(types.string()),
-    playTime: types.optional(types.number()),
-    oldNames: types.optional(z.array(types.string())),
-    identifiers: types.optional(z.array(types.string())),
-    oldIdentifiers: types.optional(z.array(types.string())),
-    bannedAt: types.optional(types.date()),
-    expiresAt: types.optional(types.date()),
-    bannedBy: types.optional(types.string()),
-  });
+export const BanPublic$inboundSchema: z.ZodMiniType<BanPublic, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: types.optional(types.string()),
+      player: types.optional(types.string()),
+      server: types.optional(types.string()),
+      reason: types.optional(types.string()),
+      details: types.optional(z.lazy(() => BanPublicDetails$inboundSchema)),
+      evidence: types.optional(types.string()),
+      playTime: types.optional(types.number()),
+      oldNames: types.optional(z.array(types.string())),
+      identifiers: types.optional(z.array(types.string())),
+      oldIdentifiers: types.optional(z.array(types.string())),
+      bannedAt: types.optional(types.date()),
+      expiresAt: types.optional(types.date()),
+      bannedBy: types.optional(types.string()),
+    })
+  );
 
 export function banPublicFromJSON(
   jsonString: string,

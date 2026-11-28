@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,9 +37,11 @@ export type GetV1PlayerSearchRequest$Outbound = {
 export const GetV1PlayerSearchRequest$outboundSchema: z.ZodMiniType<
   GetV1PlayerSearchRequest$Outbound,
   GetV1PlayerSearchRequest
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function getV1PlayerSearchRequestToJSON(
   getV1PlayerSearchRequest: GetV1PlayerSearchRequest,
@@ -50,14 +52,17 @@ export function getV1PlayerSearchRequestToJSON(
 }
 
 /** @internal */
-export const Result$inboundSchema: z.ZodMiniType<Result, unknown> = z.object({
-  id: types.optional(types.string()),
-  name: types.optional(types.string()),
-  license: types.optional(types.string()),
-  server: types.optional(types.string()),
-  lastSeen: types.optional(types.date()),
-  playTime: types.optional(types.number()),
-});
+export const Result$inboundSchema: z.ZodMiniType<Result, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: types.optional(types.string()),
+      name: types.optional(types.string()),
+      license: types.optional(types.string()),
+      server: types.optional(types.string()),
+      lastSeen: types.optional(types.date()),
+      playTime: types.optional(types.number()),
+    })
+  );
 
 export function resultFromJSON(
   jsonString: string,
@@ -73,9 +78,11 @@ export function resultFromJSON(
 export const GetV1PlayerSearchResponse$inboundSchema: z.ZodMiniType<
   GetV1PlayerSearchResponse,
   unknown
-> = z.object({
-  results: types.optional(z.array(z.lazy(() => Result$inboundSchema))),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    results: types.optional(z.array(z.lazy(() => Result$inboundSchema))),
+  })
+);
 
 export function getV1PlayerSearchResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,11 +21,13 @@ export type PostV1ServerUnbanAllResponse = {
 export const PostV1ServerUnbanAllResponse$inboundSchema: z.ZodMiniType<
   PostV1ServerUnbanAllResponse,
   unknown
-> = z.object({
-  success: types.optional(types.boolean()),
-  count: types.optional(types.number()),
-  message: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: types.optional(types.boolean()),
+    count: types.optional(types.number()),
+    message: types.optional(types.string()),
+  })
+);
 
 export function postV1ServerUnbanAllResponseFromJSON(
   jsonString: string,

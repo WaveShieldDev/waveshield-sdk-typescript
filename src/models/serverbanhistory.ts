@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import * as types from "../types/primitives.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -23,7 +23,7 @@ export type ServerBanHistory = {
 export const ServerBanHistoryDetails$inboundSchema: z.ZodMiniType<
   ServerBanHistoryDetails,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function serverBanHistoryDetailsFromJSON(
   jsonString: string,
@@ -39,14 +39,18 @@ export function serverBanHistoryDetailsFromJSON(
 export const ServerBanHistory$inboundSchema: z.ZodMiniType<
   ServerBanHistory,
   unknown
-> = z.object({
-  player: types.optional(types.string()),
-  reason: types.optional(types.string()),
-  details: types.optional(z.lazy(() => ServerBanHistoryDetails$inboundSchema)),
-  playTime: types.optional(types.number()),
-  evidence: types.optional(types.string()),
-  bannedAt: types.optional(types.date()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    player: types.optional(types.string()),
+    reason: types.optional(types.string()),
+    details: types.optional(
+      z.lazy(() => ServerBanHistoryDetails$inboundSchema),
+    ),
+    playTime: types.optional(types.number()),
+    evidence: types.optional(types.string()),
+    bannedAt: types.optional(types.date()),
+  })
+);
 
 export function serverBanHistoryFromJSON(
   jsonString: string,
